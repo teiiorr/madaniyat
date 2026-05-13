@@ -1,0 +1,283 @@
+.book-shell.is-fullscreen-active,
+.book-shell:fullscreen,
+.book-shell:-webkit-full-screen {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: #fff !important;
+    width: 100vw;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.book-shell.is-fullscreen-active .fullscreen-reader-bar,
+.book-shell:fullscreen .fullscreen-reader-bar,
+.book-shell:-webkit-full-screen .fullscreen-reader-bar {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 10px 16px;
+    background: linear-gradient(180deg, #fbfaf5 0%, #f3eedb 100%);
+    border-top: 2px solid var(--gold);
+    box-shadow: 0 -8px 24px rgba(8, 32, 61, 0.12);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.fullscreen-reader-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+}
+
+.reader-icon-button,
+.reader-text-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    height: 38px;
+    border: 1px solid #d5c98c;
+    background: linear-gradient(180deg, #ffffff 0%, #faf3df 100%);
+    color: var(--navy);
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 3px 0 #c2b06a, 0 8px 18px rgba(8, 32, 61, 0.12);
+    transform: translateY(0);
+    transition:
+        transform 0.12s ease,
+        box-shadow 0.12s ease,
+        background 0.12s ease,
+        border-color 0.12s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.reader-icon-button {
+    width: 38px;
+    font-size: 18px;
+}
+
+.reader-text-button {
+    padding: 0 12px;
+}
+
+.reader-icon-button:hover,
+.reader-text-button:hover {
+    border-color: var(--gold);
+    background: linear-gradient(180deg, #ffffff 0%, #f4e7c0 100%);
+    box-shadow: 0 4px 0 #b59f4d, 0 10px 20px rgba(8, 32, 61, 0.15);
+    transform: translateY(-1px);
+}
+
+.reader-icon-button:active,
+.reader-text-button:active {
+    box-shadow: 0 1px 0 #9b7a25, 0 4px 10px rgba(8, 32, 61, 0.12);
+    transform: translateY(2px);
+}
+
+.reader-icon-button:focus-visible,
+.reader-text-button:focus-visible {
+    outline: 3px solid rgba(201, 161, 62, 0.35);
+    outline-offset: 2px;
+}
+
+.reader-text-button.active {
+    border-color: var(--navy);
+    background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color: var(--gold-light);
+    box-shadow: 0 3px 0 #051730, 0 8px 18px rgba(8, 32, 61, 0.25);
+}
+
+.reader-button-icon {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    pointer-events: none;
+}
+
+.fullscreen-page-indicator {
+    min-width: 68px;
+    color: var(--navy-deep);
+    font-size: 13px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.fullscreen-page-slider-label {
+    flex: 1;
+    min-width: 240px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.fullscreen-page-slider {
+    width: 100%;
+    accent-color: var(--gold);
+}
+
+.book-shell.is-fullscreen-active .book-status,
+.book-shell:fullscreen .book-status,
+.book-shell:-webkit-full-screen .book-status {
+    display: none;
+}
+
+.book-shell.is-fullscreen-active .book-spread,
+.book-shell:fullscreen .book-spread,
+.book-shell:-webkit-full-screen .book-spread {
+    flex: 1;
+    min-height: 0;
+    width: min(100%, 1480px);
+    height: auto;
+    max-height: calc(100dvh - 56px);
+    margin: auto;
+    aspect-ratio: 1190.552 / 841.89;
+    background: #fff !important;
+    box-shadow: none !important;
+    align-items: center;
+    justify-content: center;
+    column-gap: 0;
+    overflow: hidden;
+    border-radius: 0;
+}
+
+
+.book-shell.is-fullscreen-active.reader-tone-soft,
+.book-shell.is-fullscreen-active.reader-tone-soft .book-spread,
+.book-shell.is-fullscreen-active.reader-tone-soft .book-page,
+.book-shell:fullscreen.reader-tone-soft,
+.book-shell:fullscreen.reader-tone-soft .book-spread,
+.book-shell:fullscreen.reader-tone-soft .book-page,
+.book-shell:-webkit-full-screen.reader-tone-soft,
+.book-shell:-webkit-full-screen.reader-tone-soft .book-spread,
+.book-shell:-webkit-full-screen.reader-tone-soft .book-page {
+    background: #f6efdf !important;
+}
+
+.book-shell.is-fullscreen-active.reader-tone-dark,
+.book-shell.is-fullscreen-active.reader-tone-dark .book-spread,
+.book-shell.is-fullscreen-active.reader-tone-dark .book-page,
+.book-shell:fullscreen.reader-tone-dark,
+.book-shell:fullscreen.reader-tone-dark .book-spread,
+.book-shell:fullscreen.reader-tone-dark .book-page,
+.book-shell:-webkit-full-screen.reader-tone-dark,
+.book-shell:-webkit-full-screen.reader-tone-dark .book-spread,
+.book-shell:-webkit-full-screen.reader-tone-dark .book-page {
+    background: #0e1a2b !important;
+}
+
+.book-shell.is-fullscreen-active.reader-tone-dark .fullscreen-reader-bar,
+.book-shell:fullscreen.reader-tone-dark .fullscreen-reader-bar,
+.book-shell:-webkit-full-screen.reader-tone-dark .fullscreen-reader-bar {
+    background: linear-gradient(180deg, #0e1a2b 0%, #08203d 100%);
+    border-top-color: var(--gold);
+}
+
+.book-shell.is-fullscreen-active.reader-tone-dark .fullscreen-page-indicator,
+.book-shell.is-fullscreen-active.reader-tone-dark .fullscreen-page-slider-label,
+.book-shell:fullscreen.reader-tone-dark .fullscreen-page-indicator,
+.book-shell:fullscreen.reader-tone-dark .fullscreen-page-slider-label,
+.book-shell:-webkit-full-screen.reader-tone-dark .fullscreen-page-indicator,
+.book-shell:-webkit-full-screen.reader-tone-dark .fullscreen-page-slider-label {
+    color: var(--gold-light);
+}
+
+.book-shell.is-fullscreen-active .book-gutter,
+.book-shell:fullscreen .book-gutter,
+.book-shell:-webkit-full-screen .book-gutter {
+    display: none;
+}
+
+.book-shell.is-fullscreen-active .book-page,
+.book-shell:fullscreen .book-page,
+.book-shell:-webkit-full-screen .book-page {
+    background: #fff !important;
+    height: 100%;
+    width: 100%;
+    min-height: 0;
+    align-items: center;
+    padding: 12px 12px 18px;
+}
+
+.book-shell.is-fullscreen-active.is-spread-view .left-page,
+.book-shell:fullscreen.is-spread-view .left-page,
+.book-shell:-webkit-full-screen.is-spread-view .left-page {
+    justify-content: flex-end;
+    padding-right: 4px;
+}
+
+.book-shell.is-fullscreen-active.is-spread-view .right-page,
+.book-shell:fullscreen.is-spread-view .right-page,
+.book-shell:-webkit-full-screen.is-spread-view .right-page {
+    justify-content: flex-start;
+    padding-left: 4px;
+}
+
+.book-shell.is-fullscreen-active.is-single-view .right-page,
+.book-shell:fullscreen.is-single-view .right-page,
+.book-shell:-webkit-full-screen.is-single-view .right-page {
+    max-width: min(100%, 760px);
+}
+
+.book-shell.is-fullscreen-active.is-single-view .book-spread,
+.book-shell:fullscreen.is-single-view .book-spread,
+.book-shell:-webkit-full-screen.is-single-view .book-spread {
+    width: min(100%, 800px);
+    aspect-ratio: 595.276 / 841.89;
+}
+
+.book-shell.is-fullscreen-active.is-spread-view .book-page canvas,
+.book-shell:fullscreen.is-spread-view .book-page canvas,
+.book-shell:-webkit-full-screen.is-spread-view .book-page canvas {
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+}
+
+.book-shell.is-fullscreen-active.is-single-view .book-page canvas,
+.book-shell:fullscreen.is-single-view .book-page canvas,
+.book-shell:-webkit-full-screen.is-single-view .book-page canvas {
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+}
+
+.book-shell.reader-tone-soft .book-page canvas {
+    filter: sepia(0.08) contrast(0.96) brightness(1.02);
+}
+
+.book-shell.reader-tone-dark .book-page canvas {
+    filter: brightness(0.9) contrast(0.95);
+}
+
+.book-shell.is-fullscreen-active .page-number,
+.book-shell:fullscreen .page-number,
+.book-shell:-webkit-full-screen .page-number {
+    bottom: 10px;
+}
+
+.book-shell:fullscreen::backdrop,
+.book-shell:-webkit-full-screen::backdrop {
+    background: #fff;
+}

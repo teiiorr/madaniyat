@@ -1,0 +1,60 @@
+:root {
+    --page-bg: #0d2a4a;
+    --panel: #ffffff;
+    --muted: #5a6c80;
+    --text: #14213d;
+    --border: #dde4ee;
+    --border-soft: #ecf0f7;
+    --navy: #143a6b;
+    --navy-dark: #0d2a4a;
+    --navy-deep: #08203d;
+    --blue: #2a64a8;
+    --blue-bright: #3a7dc8;
+    --gold: #c9a13e;
+    --gold-light: #e6c462;
+    --gold-deep: #9b7a25;
+    --gold-soft: #f4e7c0;
+    --shadow-soft: 0 12px 32px rgba(13, 42, 74, 0.12);
+    --shadow-header: 0 16px 40px rgba(8, 32, 61, 0.2);
+    --radius: 14px;
+    --radius-sm: 8px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--page-bg);
+    color: var(--text);
+    font-family: "Onest", system-ui, sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+:lang(ru),
+:lang(ru) button,
+:lang(ru) input {
+    font-family: "Inter", system-ui, sans-serif;
+}
+
+body.nav-open {
+    overflow: hidden;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}

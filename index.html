@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="pageTitle">OʻzDSMI</title>
+    <meta name="description" content="Oʻzbekiston madaniyati va sanʼati ilmiy-amaliy jurnali sayti.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/styles/style.css">
+</head>
+<body>
+    <button class="mobile-nav-toggle" type="button" id="mobile-nav-toggle" aria-label="Menyu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="page-background" aria-hidden="true"></div>
+
+    <div class="site-shell">
+        <header class="masthead">
+            <div class="masthead-top">
+                <div class="identity">
+                    <a class="identity-logo" href="./" aria-label="Sahifani yangilash">
+                        <img src="/assets/logo.png" alt="OʻzDSMI logo">
+                    </a>
+                    <div class="identity-copy">
+                        <h1 data-i18n="pageTitle">OʻzDSMI</h1>
+                        <p class="identity-meta">ISSN (O) XXXX-XXXX, ISSN (P) XXXX-XXXX</p>
+                    </div>
+                </div>
+
+                <div class="header-tools">
+                    <div class="language-switcher" aria-label="Til tanlash">
+                        <button class="language-button active" type="button" data-lang="uz">UZ</button>
+                        <button class="language-button" type="button" data-lang="ru">RU</button>
+                        <button class="language-button" type="button" data-lang="en">EN</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="masthead-banner">
+                <div class="banner-art"></div>
+                <div class="banner-copy">
+                    <h2 data-i18n="heroTitle">Tadqiqotlar, maqolalar va ilmiy muloqot uchun zamonaviy jurnal makoni</h2>
+                </div>
+            </div>
+
+            <nav class="top-nav" aria-label="Jurnal boʻlimlari" id="sidebar">
+                <button class="nav-button active" type="button" data-tab="jurnal-haqida" data-i18n="navAbout">Jurnal haqida</button>
+                <button class="nav-button" type="button" data-tab="talablar" data-i18n="navRequirements">Talablar</button>
+                <button class="nav-button" type="button" data-tab="arxiv" data-i18n="navArchive">Arxiv</button>
+                <button class="nav-button" type="button" data-tab="redkollegiya" data-i18n="navEditorial">Redkollegiya</button>
+
+                <form class="nav-search" action="#" method="get">
+                    <input type="search" placeholder="Topish" aria-label="Topish">
+                    <button type="submit">⌕</button>
+                </form>
+            </nav>
+
+            <div class="notice-bar">
+                <span data-i18n="noticeText">Joriy son — 3-son, 2025-yil. PDF nashr endi onlayn mavjud.</span>
+            </div>
+        </header>
+
+        <div class="page-shell">
+            <main class="content">
+                <header class="content-header">
+                    <div>
+                        <h2 class="content-title" data-i18n="pageTitle">OʻzDSMI</h2>
+                        <div class="breadcrumb" aria-label="Breadcrumb">
+                            <span data-i18n="breadcrumbHome">Asosiy sahifa</span>
+                            <span>/</span>
+                            <span data-i18n="breadcrumbJournal">Jurnal</span>
+                            <span>/</span>
+                            <strong id="breadcrumb-current" data-i18n="navAbout">Jurnal haqida</strong>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="tab-panel active" id="jurnal-haqida" data-label-key="navAbout" data-label="Jurnal haqida">
+                    <div class="journal-layout">
+                        <div class="journal-main">
+                            <h3 class="section-title" data-i18n="aboutTitle">Jurnal faoliyati va maqsadi</h3>
+                            <p class="lead-paragraph" data-i18n="aboutIntro">OʻzDSMI jurnali sanʼatshunoslik, madaniyatshunoslik va ijodiy tadqiqotlar sohasidagi ilmiy maqolalarni nashr etadi.</p>
+
+                            <div class="text-block">
+                                <p data-i18n="aboutCopyOne">Nashr Oʻzbekiston va xorijlik mualliflarning ilmiy ishlarini, sharhlarni, suhbatlarni va arxiv materiallarini birlashtiradi.</p>
+                                <p data-i18n="aboutCopyTwo">Jurnal Oliy attestatsiya komissiyasi roʻyxatiga kiritilgan va mintaqaviy madaniy meros boʻyicha bilim almashish maydonchasi boʻlib xizmat qiladi.</p>
+                            </div>
+
+                            <div class="text-summary">
+                                <p><strong data-i18n="periodicity">Davriyligi</strong>: <span data-i18n="periodicityValue">Choraklik (yiliga 4 marta)</span></p>
+                                <p><strong data-i18n="languages">Tillar</strong>: <span data-i18n="languagesValue">Oʻzbek, rus, ingliz</span></p>
+                                <p><strong data-i18n="format">Nashr formati</strong>: <span data-i18n="formatValue">Elektron PDF va veb-arxiv</span></p>
+                            </div>
+
+                            <div class="subsection">
+                                <h3 class="subsection-title" data-i18n="editorialTitle">Redkollegiya tarkibi</h3>
+                                <ul class="editorial-list">
+                                    <li>Sanʼatshunoslik fanlari doktori</li>
+                                    <li>Madaniyatshunoslik boʻyicha professor</li>
+                                    <li>Musiqashunoslik tadqiqotchisi</li>
+                                    <li>Teatr va kino mutaxassisi</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <aside class="journal-archive-preview">
+                            <div class="archive-year-block">
+                                <h4>2025</h4>
+                                <div class="cover-grid">
+                                    <article class="cover-card">
+                                        <div class="cover-thumb cover-a"></div>
+                                        <a href="#arxiv" class="cover-link">3-son</a>
+                                    </article>
+                                    <article class="cover-card">
+                                        <div class="cover-thumb cover-b"></div>
+                                        <a href="#arxiv" class="cover-link">2-son</a>
+                                    </article>
+                                </div>
+                            </div>
+
+                            <div class="archive-year-block">
+                                <h4>2024</h4>
+                                <div class="cover-grid">
+                                    <article class="cover-card">
+                                        <div class="cover-thumb cover-c"></div>
+                                        <a href="#arxiv" class="cover-link">4-son</a>
+                                    </article>
+                                    <article class="cover-card">
+                                        <div class="cover-thumb cover-d"></div>
+                                        <a href="#arxiv" class="cover-link">3-son</a>
+                                    </article>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </section>
+
+                <section class="tab-panel" id="talablar" data-label-key="navRequirements" data-label="Talablar">
+                    <h3 class="section-title" data-i18n="requirementsTitle">Mualliflar uchun asosiy talablar</h3>
+                    <p class="lead-paragraph" data-i18n="requirementsIntro">Maqolalar quyidagi shakl va mazmun talablariga muvofiq taqdim etiladi.</p>
+
+                    <div class="plain-sections">
+                        <section class="plain-box">
+                            <h4 data-i18n="reqOne">1. Matn hajmi</h4>
+                            <p data-i18n="reqOneDesc">8–15 sahifa, A4, 12 kegl, 1.5 interval.</p>
+                        </section>
+                        <section class="plain-box">
+                            <h4 data-i18n="reqTwo">2. Tuzilishi</h4>
+                            <p data-i18n="reqTwoDesc">Kirish, asosiy qism, xulosa, foydalanilgan adabiyotlar roʻyxati.</p>
+                        </section>
+                        <section class="plain-box">
+                            <h4 data-i18n="reqThree">3. Til talabi</h4>
+                            <p data-i18n="reqThreeDesc">Oʻzbek, rus yoki ingliz tillarida; annotatsiya uchta tilda.</p>
+                        </section>
+                        <section class="plain-box">
+                            <h4 data-i18n="reqFour">4. Format</h4>
+                            <p data-i18n="reqFourDesc">DOCX yoki RTF, rasmlar 300 dpi, alohida fayl sifatida.</p>
+                        </section>
+                    </div>
+
+                    <ol class="check-list">
+                        <li data-i18n="reqPointOne">Mualliflar haqida toʻliq maʼlumot va ORCID identifikatori.</li>
+                        <li data-i18n="reqPointTwo">UDK indeksi va kalit soʻzlar (kamida 5 ta).</li>
+                        <li data-i18n="reqPointThree">Foydalanilgan adabiyotlar roʻyxati ISO 690 standartida.</li>
+                        <li data-i18n="reqPointFour">Plagiat darajasi 25% dan oshmasligi shart.</li>
+                    </ol>
+                </section>
+
+                <section class="tab-panel" id="arxiv" data-label-key="navArchive" data-label="Arxiv">
+                    <h3 class="section-title" data-i18n="archiveTitle">Jurnal arxivi</h3>
+                    <p class="lead-paragraph" data-i18n="archiveIntro">Barcha sonlar ochiq kirish rejimida mavjud. Quyidagi roʻyxatdan kerakli sonni tanlang.</p>
+
+                    <div class="archive-listing">
+                        <div class="archive-row">
+                            <div class="archive-meta">
+                                <strong>2025</strong>
+                                <span data-i18n="archiveIssueA">3-son</span>
+                                <p data-i18n="archiveItemA1">Mavzu: Zamonaviy oʻzbek sanʼati va xalqaro kontekst.</p>
+                                <p data-i18n="archiveItemA2">12 ta ilmiy maqola, 4 ta sharh.</p>
+                            </div>
+                            <div class="archive-cover cover-a"></div>
+                        </div>
+                        <div class="archive-row">
+                            <div class="archive-meta">
+                                <strong>2025</strong>
+                                <span data-i18n="archiveIssueB">2-son</span>
+                                <p data-i18n="archiveItemB1">Mavzu: Teatr va kino: anʼanalar va innovatsiyalar.</p>
+                                <p data-i18n="archiveItemB2">10 ta ilmiy maqola, 3 ta sharh.</p>
+                            </div>
+                            <div class="archive-cover cover-b"></div>
+                        </div>
+                        <div class="archive-row">
+                            <div class="archive-meta">
+                                <strong>2024</strong>
+                                <span data-i18n="archiveIssueC">4-son</span>
+                                <p data-i18n="archiveItemC1">Mavzu: Musiqa merosi va etnomusikashunoslik.</p>
+                                <p data-i18n="archiveItemC2">11 ta ilmiy maqola, 2 ta tarjima.</p>
+                            </div>
+                            <div class="archive-cover cover-c"></div>
+                        </div>
+                    </div>
+
+                    <div class="viewer-divider" data-i18n="journal">Jurnal</div>
+
+                    <div class="journal-viewer">
+                        <div class="viewer-head">
+                            <div>
+                                <h3 data-i18n="viewerTitle">Soʻnggi sonni koʻrish</h3>
+                            </div>
+                        </div>
+
+                        <div class="viewer-toolbar">
+                            <div class="viewer-toolbar-left">
+                                <div class="view-mode-switch" aria-label="Koʻrish rejimi">
+                                    <button class="view-mode-button" type="button" data-view-mode="single" aria-pressed="false">
+                                        <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3" width="12" height="18" rx="1.5"></rect></svg>
+                                        <span data-i18n="singlePage">1 sahifa</span>
+                                    </button>
+                                    <button class="view-mode-button" type="button" data-view-mode="spread" aria-pressed="true">
+                                        <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="18" rx="1.5"></rect><rect x="13" y="3" width="8" height="18" rx="1.5"></rect></svg>
+                                        <span data-i18n="twoPages">2 sahifa</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <form class="page-jump" id="page-jump-form">
+                                <label class="page-jump-label" for="page-input" data-i18n="page">Sahifa</label>
+                                <input id="page-input" class="page-jump-input" type="number" min="1" step="1" value="1" inputmode="numeric">
+                                <button class="page-jump-button" type="submit" data-i18n="open">Ochish</button>
+                            </form>
+                        </div>
+
+                        <div class="viewer-stage">
+                            <div class="book-shell" id="book-shell">
+                                <div class="book-status" id="journal-status" data-i18n="pdfLoading">PDF yuklanmoqda...</div>
+
+                                <div class="book-spread" id="book-spread">
+                                    <div class="book-gutter"></div>
+
+                                    <div class="book-page left-page" id="left-page">
+                                        <div class="page-number left-number" id="left-page-number"></div>
+                                        <canvas id="left-page-canvas"></canvas>
+                                        <div class="page-empty" id="left-page-empty" data-i18n="emptyPage">Boʻsh sahifa</div>
+                                    </div>
+
+                                    <div class="book-page right-page" id="right-page">
+                                        <div class="page-number right-number" id="right-page-number"></div>
+                                        <canvas id="right-page-canvas"></canvas>
+                                        <div class="page-empty" id="right-page-empty" data-i18n="emptyPage">Boʻsh sahifa</div>
+                                    </div>
+                                </div>
+
+                                <div class="book-nav-corner">
+                                    <button class="viewer-arrow book-corner-arrow" type="button" data-journal-nav="prev" aria-label="Oldingi sahifalar">&#8592;</button>
+                                    <button class="viewer-arrow book-corner-arrow" type="button" data-journal-nav="next" aria-label="Keyingi sahifalar">&#8594;</button>
+                                </div>
+
+                                <div class="fullscreen-reader-bar" aria-label="Oʻqish sozlamalari">
+                                    <div class="fullscreen-reader-group">
+                                        <button class="reader-icon-button" type="button" data-journal-nav="prev" aria-label="Oldingi sahifalar">
+                                            <svg class="reader-button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+                                        </button>
+                                        <strong class="fullscreen-page-indicator" id="fullscreen-page-counter">0 / 0</strong>
+                                        <button class="reader-icon-button" type="button" data-journal-nav="next" aria-label="Keyingi sahifalar">
+                                            <svg class="reader-button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+                                        </button>
+                                    </div>
+
+                                    <label class="fullscreen-page-slider-label" for="fullscreen-page-slider">
+                                        <span data-i18n="page">Sahifa</span>
+                                        <input id="fullscreen-page-slider" class="fullscreen-page-slider" type="range" min="1" max="1" value="1">
+                                    </label>
+
+                                    <div class="fullscreen-reader-group">
+                                        <button class="reader-text-button" type="button" data-reader-tone="soft">
+                                            <svg class="reader-button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v2"></path><path d="M12 19v2"></path><path d="M4.2 4.2l1.4 1.4"></path><path d="M18.4 18.4l1.4 1.4"></path><path d="M3 12h2"></path><path d="M19 12h2"></path><circle cx="12" cy="12" r="4"></circle></svg>
+                                            <span data-i18n="softMode">Yumshoq</span>
+                                        </button>
+                                        <button class="reader-text-button" type="button" data-reader-tone="dark">
+                                            <svg class="reader-button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A7.5 7.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"></path></svg>
+                                            <span data-i18n="darkMode">Tungi</span>
+                                        </button>
+                                        <button class="reader-text-button" type="button" data-view-mode="single">
+                                            <svg class="reader-button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path></svg>
+                                            <span data-i18n="singlePage">1 sahifa</span>
+                                        </button>
+                                        <button class="reader-text-button" type="button" id="fullscreen-exit">
+                                            <svg class="reader-button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3v3a2 2 0 0 1-2 2H3"></path><path d="M21 8h-3a2 2 0 0 1-2-2V3"></path><path d="M16 21v-3a2 2 0 0 1 2-2h3"></path><path d="M3 16h3a2 2 0 0 1 2 2v3"></path></svg>
+                                            <span data-i18n="exitFullscreen">Oddiy ekran</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="viewer-footer">
+                            <div class="viewer-counter">
+                                <strong id="journal-page-counter">0 / 0</strong>
+                            </div>
+                            <div class="viewer-footer-actions">
+                                <a class="pdf-link" href="/assets/journal/madaniyat-sanat-3-son.pdf" target="_blank" rel="noopener noreferrer" data-i18n="openPdf">PDF ochish</a>
+                                <button class="viewer-action" type="button" id="fullscreen-toggle" aria-label="Toʻliq ekran" data-i18n="fullscreen">
+                                    Toʻliq ekran
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="tab-panel" id="redkollegiya" data-label-key="navEditorial" data-label="Redkollegiya">
+                    <h3 class="section-title" data-i18n="editorialTitle">Redkollegiya tarkibi</h3>
+                    <p class="lead-paragraph" data-i18n="editorialIntro">Jurnalning ilmiy yoʻnalishini Oʻzbekiston va xorijning yetakchi mutaxassislari belgilab beradi.</p>
+
+                    <div class="board-grid">
+                        <article class="board-card">
+                            <div class="board-photo">Foto</div>
+                            <div class="board-content">
+                                <span class="board-role" data-i18n="chiefEditor">Bosh muharrir</span>
+                                <h3>Sanʼatshunoslik d.f.</h3>
+                                <p data-i18n="editorOne">Madaniyatshunoslik va sanʼat tarixi boʻyicha 25 yillik tajriba.</p>
+                            </div>
+                        </article>
+                        <article class="board-card">
+                            <div class="board-photo">Foto</div>
+                            <div class="board-content">
+                                <span class="board-role" data-i18n="deputyEditor">Muharrir oʻrinbosari</span>
+                                <h3>Musiqashunos professor</h3>
+                                <p data-i18n="editorTwo">Anʼanaviy musiqa va etnomusikashunoslik tadqiqotchisi.</p>
+                            </div>
+                        </article>
+                        <article class="board-card">
+                            <div class="board-photo">Foto</div>
+                            <div class="board-content">
+                                <span class="board-role" data-i18n="secretary">Masʼul kotib</span>
+                                <h3>Teatrshunos dotsent</h3>
+                                <p data-i18n="editorThree">Teatr va sahna sanʼati boʻyicha mutaxassis.</p>
+                            </div>
+                        </article>
+                        <article class="board-card">
+                            <div class="board-photo">Foto</div>
+                            <div class="board-content">
+                                <span class="board-role" data-i18n="technicalEditor">Texnik muharrir</span>
+                                <h3>Tasviriy sanʼat mutaxassisi</h3>
+                                <p data-i18n="editorFour">Zamonaviy sanʼat va vizual madaniyat yoʻnalishi.</p>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </main>
+
+            <aside class="sidebar-column">
+                <section class="side-block side-cta">
+                    <h3 data-i18n="sideSubmission">Maqola yuborish</h3>
+                </section>
+
+                <section class="side-block">
+                    <div class="side-head" data-i18n="sideCurrentIssue">Joriy son</div>
+                    <div class="side-body">
+                        <p data-i18n="sideIssueText">3-son, 2025-yil</p>
+                        <p data-i18n="sideIssueDate">Nashr sanasi: oktyabr 2025</p>
+                        <p data-i18n="sideIssueArticles">12 ta ilmiy maqola</p>
+                        <p data-i18n="sideIssueTheme">Mavzu: Zamonaviy sanʼat va kontekst</p>
+                    </div>
+                </section>
+
+                <section class="side-block">
+                    <div class="side-head">Til</div>
+                    <div class="side-body side-links">
+                        <a href="#" data-lang-short="ru">Русский</a>
+                        <a href="#" data-lang-short="en">English</a>
+                        <a href="#" data-lang-short="uz">Oʻzbek</a>
+                    </div>
+                </section>
+
+                <section class="side-block">
+                    <div class="side-head" data-i18n="sideLinks">Tezkor havolalar</div>
+                    <div class="side-body side-links">
+                        <a href="#talablar" data-i18n="navRequirements">Talablar</a>
+                        <a href="#arxiv" data-i18n="navArchive">Arxiv</a>
+                        <a href="/assets/journal/madaniyat-sanat-3-son.pdf" target="_blank" rel="noopener noreferrer" data-i18n="openPdf">PDF ochish</a>
+                        <a href="#redkollegiya" data-i18n="navEditorial">Redkollegiya</a>
+                    </div>
+                </section>
+
+                <section class="side-block">
+                    <div class="side-head" data-i18n="sideContacts">Aloqa</div>
+                    <div class="side-body">
+                        <p>info@ozdsmi.uz</p>
+                        <p>+998 71 000-00-00</p>
+                        <p data-i18n="sideAddress">Toshkent sh., Oʻzbekiston</p>
+                    </div>
+                </section>
+            </aside>
+        </div>
+    </div>
+
+    <script src="/assets/vendor/pdf.min.js"></script>
+    <script type="module" src="/src/scripts/app.js"></script>
+</body>
+</html>
