@@ -1,8 +1,20 @@
 :root {
-    --page-bg: #0d2a4a;
+    /* surfaces */
+    --page-bg: #0a2038;
+    --rail: #0a2038;
+    --rail-2: #0d2746;
+    --paper: #f7f3ea;
+    --paper-2: #fefcf7;
+
+    /* ink + lines */
+    --text: #25303f;
+    --ink: #122039;
+    --muted: #6a7382;
+    --line: #e6dcc9;
+    --line-soft: #efe7d6;
+
+    /* brand (kept so the PDF reader styling works) */
     --panel: #ffffff;
-    --muted: #5a6c80;
-    --text: #14213d;
     --border: #dde4ee;
     --border-soft: #ecf0f7;
     --navy: #143a6b;
@@ -14,8 +26,19 @@
     --gold-light: #e6c462;
     --gold-deep: #9b7a25;
     --gold-soft: #f4e7c0;
-    --shadow-soft: 0 12px 32px rgba(13, 42, 74, 0.12);
+
+    /* rail */
+    --rail-text: #eae3d3;
+    --rail-muted: #8da3c2;
+    --rail-line: rgba(255, 255, 255, 0.12);
+
+    --shadow-soft: 0 12px 32px rgba(8, 26, 48, 0.12);
     --shadow-header: 0 16px 40px rgba(8, 32, 61, 0.2);
+    --shadow-card: 0 14px 34px rgba(8, 26, 48, 0.1);
+
+    --font-display: "Sora", system-ui, sans-serif;
+    --font-body: "Onest", system-ui, -apple-system, sans-serif;
+    --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
     --radius: 14px;
     --radius-sm: 8px;
 }
@@ -28,25 +51,31 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 84px;
 }
 
 body {
     min-height: 100vh;
     background: var(--page-bg);
     color: var(--text);
-    font-family: "Onest", system-ui, sans-serif;
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
-}
-
-:lang(ru),
-:lang(ru) button,
-:lang(ru) input {
-    font-family: "Inter", system-ui, sans-serif;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body.nav-open {
     overflow: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    color: var(--ink);
+    line-height: 1.12;
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 button,
@@ -57,4 +86,28 @@ input {
 a {
     color: inherit;
     text-decoration: none;
+    transition: color 0.2s var(--ease);
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+::selection {
+    background: var(--gold);
+    color: #1a1206;
+}
+
+:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+    }
 }
