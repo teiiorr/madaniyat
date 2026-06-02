@@ -341,3 +341,11 @@
     line-height: 1.65;
     color: var(--muted);
 }
+
+.foot-credit {
+    margin-top: 14px;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    opacity: 0.75;
+}
