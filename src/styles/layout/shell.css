@@ -123,6 +123,7 @@
 }
 
 .rail-nav a {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 14px;
@@ -133,6 +134,19 @@
     font-weight: 500;
     color: var(--rail-muted);
     transition: color 0.25s var(--ease), background 0.25s var(--ease);
+}
+
+.rail-nav a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 3px;
+    height: 0;
+    border-radius: 2px;
+    background: var(--gold);
+    transform: translateY(-50%);
+    transition: height 0.28s var(--ease);
 }
 
 .rail-nav-num {
@@ -151,6 +165,10 @@
 .rail-nav a.active {
     color: #fff;
     background: rgba(201, 161, 62, 0.14);
+}
+
+.rail-nav a.active::before {
+    height: 60%;
 }
 
 .rail-nav a.active .rail-nav-num {

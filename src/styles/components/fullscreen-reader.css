@@ -111,6 +111,10 @@
     pointer-events: none;
 }
 
+.reader-text-button .reader-button-icon {
+    display: none;
+}
+
 .fullscreen-page-indicator {
     min-width: 68px;
     color: var(--navy-deep);

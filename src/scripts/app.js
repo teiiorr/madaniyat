@@ -146,31 +146,58 @@ if (navScrim) {
     navScrim.addEventListener("click", closeNav);
 }
 
-railNavLinks.forEach((link) => {
-    link.addEventListener("click", () => {
+// ===== Tabbed sections =====
+const tabSections = [...document.querySelectorAll(".main .sec")];
+
+function resolveSectionId(hash) {
+    const id = (hash || "").replace(/^#/, "");
+    return tabSections.some((section) => section.id === id)
+        ? id
+        : (tabSections[0] ? tabSections[0].id : "");
+}
+
+function activateSection(id, { scroll = true } = {}) {
+    const targetId = resolveSectionId(`#${id}`);
+    const target = tabSections.find((section) => section.id === targetId);
+    if (!target) return;
+
+    tabSections.forEach((section) => {
+        section.classList.toggle("is-active", section === target);
+    });
+    railNavLinks.forEach((link) => {
+        link.classList.toggle("active", link.getAttribute("href") === `#${targetId}`);
+    });
+
+    if (targetId === "arxiv") {
+        requestAnimationFrame(() => renderSpread(spreadStart || 1));
+    }
+
+    if (scroll) {
+        window.scrollTo(0, 0);
+    }
+}
+
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    const id = link.getAttribute("href").slice(1);
+    if (!id || !tabSections.some((section) => section.id === id)) return;
+
+    link.addEventListener("click", (event) => {
+        event.preventDefault();
         if (window.innerWidth <= 960) {
             closeNav();
         }
+        if (location.hash !== `#${id}`) {
+            history.pushState(null, "", `#${id}`);
+        }
+        activateSection(id);
     });
 });
 
-const spySections = railNavLinks
-    .map((link) => document.querySelector(link.getAttribute("href")))
-    .filter(Boolean);
+window.addEventListener("popstate", () => {
+    activateSection(resolveSectionId(location.hash), { scroll: false });
+});
 
-if ("IntersectionObserver" in window && spySections.length) {
-    const spy = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            const id = `#${entry.target.id}`;
-            railNavLinks.forEach((link) => {
-                link.classList.toggle("active", link.getAttribute("href") === id);
-            });
-        });
-    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
-
-    spySections.forEach((section) => spy.observe(section));
-}
+activateSection(resolveSectionId(location.hash), { scroll: false });
 
 // ===== PDF viewer =====
 function clampPage(page) {
