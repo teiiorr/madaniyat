@@ -349,3 +349,69 @@
     color: var(--muted);
     opacity: 0.75;
 }
+
+/* ===== Archive issues ===== */
+.archive-issues {
+    margin: 10px 0 34px;
+    border-top: 1px solid var(--line);
+}
+
+.archive-year {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 15px 2px;
+    border-bottom: 1px solid var(--line);
+}
+
+.archive-year-label {
+    flex: 0 0 60px;
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+}
+
+.archive-year-issues {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.issue-chip {
+    min-width: 62px;
+    padding: 9px 16px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s var(--ease), color 0.2s var(--ease),
+        border-color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+
+.issue-chip:hover {
+    border-color: var(--navy);
+    color: var(--navy);
+    transform: translateY(-1px);
+}
+
+.issue-chip.is-active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #fff;
+}
+
+.viewer-current-issue {
+    margin-top: 10px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--navy);
+}

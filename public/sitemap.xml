@@ -2,14 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://uzsiac-journal.uz/</loc>
-    <lastmod>2026-06-10</lastmod>
+    <lastmod>2026-06-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://uzsiac-journal.uz/assets/journal/madaniyat-sanat-3-son.pdf</loc>
-    <lastmod>2026-06-10</lastmod>
+    <loc>https://uzsiac-journal.uz/assets/journal/2026-3.pdf</loc>
+    <lastmod>2026-06-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://uzsiac-journal.uz/assets/journal/2026-2.pdf</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://uzsiac-journal.uz/assets/journal/2026-1.pdf</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://uzsiac-journal.uz/assets/journal/2025-2.pdf</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://uzsiac-journal.uz/assets/journal/2025-1.pdf</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

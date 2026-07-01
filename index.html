@@ -31,17 +31,16 @@
     <!-- Google Scholar / Highwire Press citation metadata -->
     <meta name="citation_journal_title" content="O'zbekiston madaniyati va san'ati">
     <meta name="citation_publisher" content="O'zbekiston davlat san'at va madaniyat instituti">
-    <!-- TODO: ISSN assigned but number not provided yet. When available, uncomment:
-    <meta name="citation_issn" content="XXXX-XXXX"> -->
-    <meta name="citation_title" content="O'zbekiston madaniyati va san'ati — 3-son (2025)">
+    <meta name="citation_issn" content="3093-8597">
+    <meta name="citation_title" content="O'zbekiston madaniyati va san'ati — 3-son (2026)">
     <meta name="citation_issue" content="3">
-    <meta name="citation_publication_date" content="2025">
-    <meta name="citation_date" content="2025">
+    <meta name="citation_publication_date" content="2026">
+    <meta name="citation_date" content="2026">
     <meta name="citation_language" content="uz">
     <meta name="citation_abstract_html_url" content="https://uzsiac-journal.uz/">
-    <meta name="citation_pdf_url" content="https://uzsiac-journal.uz/assets/journal/madaniyat-sanat-3-son.pdf">
+    <meta name="citation_pdf_url" content="https://uzsiac-journal.uz/assets/journal/2026-3.pdf">
     <!-- Future DOI (after Crossref registration), add per issue, e.g.:
-    <meta name="citation_doi" content="10.XXXXX/uzsiac-journal.2025.3"> -->
+    <meta name="citation_doi" content="10.XXXXX/uzsiac-journal.2026.3"> -->
 
     <!-- Dublin Core -->
     <meta name="DC.title" content="O'zbekiston madaniyati va san'ati">
@@ -49,7 +48,8 @@
     <meta name="DC.language" content="uz">
     <meta name="DC.type" content="Text">
     <meta name="DC.format" content="application/pdf">
-    <meta name="DCTERMS.issued" content="2025">
+    <meta name="DC.identifier" content="ISSN 3093-8597">
+    <meta name="DCTERMS.issued" content="2026">
 
     <!-- Structured data -->
     <script type="application/ld+json">
@@ -57,6 +57,7 @@
       "@context": "https://schema.org",
       "@type": "Periodical",
       "name": "O'zbekiston madaniyati va san'ati",
+      "issn": "3093-8597",
       "inLanguage": ["uz", "ru", "en"],
       "url": "https://uzsiac-journal.uz/",
       "publisher": {
@@ -67,8 +68,8 @@
       "hasPart": {
         "@type": "PublicationIssue",
         "issueNumber": "3",
-        "datePublished": "2025",
-        "url": "https://uzsiac-journal.uz/assets/journal/madaniyat-sanat-3-son.pdf"
+        "datePublished": "2026",
+        "url": "https://uzsiac-journal.uz/assets/journal/2026-3.pdf"
       }
     }
     </script>
@@ -221,11 +222,16 @@
                     <h2 class="sec-title">Arxiv</h2>
                 </header>
 
+                <p class="sec-lead">Jurnalning barcha e'lon qilingan sonlari — yangisidan eskisiga. Kerakli sonni tanlang va shu sahifada o'qing.</p>
+
+                <div class="archive-issues" id="archive-issues" aria-label="Jurnal sonlari"></div>
+
                 <div class="journal-viewer">
                     <div class="viewer-head">
                         <div>
-                            <h3>So'nggi sonni o'qish</h3>
-                            <p>Jurnalning so'nggi soni bilan to'g'ridan-to'g'ri shu sahifada tanishing — varaqlang yoki to'liq ekran rejimida o'qing.</p>
+                            <h3>Jurnal sonini o'qish</h3>
+                            <p>Tanlangan sonni to'g'ridan-to'g'ri shu sahifada o'qing — varaqlang yoki to'liq ekran rejimida o'qing.</p>
+                            <p class="viewer-current-issue" id="viewer-current-issue"></p>
                         </div>
                     </div>
 
@@ -289,7 +295,7 @@
                     <div class="viewer-footer">
                         <div class="viewer-counter"><strong id="journal-page-counter">0 / 0</strong></div>
                         <div class="viewer-footer-actions">
-                            <a class="pdf-link" href="/assets/journal/madaniyat-sanat-3-son.pdf" target="_blank" rel="noopener noreferrer">PDF ochish</a>
+                            <a class="pdf-link" id="pdf-link" href="/assets/journal/2026-3.pdf" target="_blank" rel="noopener noreferrer">PDF ochish</a>
                             <button class="viewer-action" type="button" id="fullscreen-toggle" aria-label="To'liq ekran">To'liq ekran</button>
                         </div>
                     </div>

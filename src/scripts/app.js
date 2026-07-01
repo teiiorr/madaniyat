@@ -24,7 +24,21 @@ const railNavLinks = [...document.querySelectorAll(".rail-nav a")];
 const menuToggle = document.getElementById("menu-toggle");
 const navScrim = document.getElementById("nav-scrim");
 
-const PDF_URL = "/assets/journal/madaniyat-sanat-3-son.pdf";
+const archiveContainer = document.getElementById("archive-issues");
+const pdfLink = document.getElementById("pdf-link");
+const viewerCurrentIssue = document.getElementById("viewer-current-issue");
+
+// All published issues, newest first.
+const JOURNAL_ISSUES = [
+    { year: 2026, issue: 3 },
+    { year: 2026, issue: 2 },
+    { year: 2026, issue: 1 },
+    { year: 2025, issue: 2 },
+    { year: 2025, issue: 1 }
+].map((entry) => ({ ...entry, file: `/assets/journal/${entry.year}-${entry.issue}.pdf` }));
+
+let currentIssue = JOURNAL_ISSUES[0];
+let PDF_URL = currentIssue.file;
 const PDF_PAGE_WIDTH = 595.276;
 const PDF_PAGE_HEIGHT = 841.89;
 
@@ -32,6 +46,7 @@ const PDF_PAGE_HEIGHT = 841.89;
 let pdfDoc = null;
 let totalPages = 0;
 let spreadStart = 1;
+let pdfLoadToken = 0;
 let isRendering = false;
 let queuedSpread = null;
 let currentViewMode = window.innerWidth <= 780 ? "single" : "spread";
@@ -579,21 +594,107 @@ async function loadPdf() {
 
     pdfjsLib.GlobalWorkerOptions.workerSrc = "/assets/vendor/pdf.worker.min.js";
 
+    // Each load bumps a token; only the latest request renders, so picking
+    // another issue before the current PDF finishes doesn't leave a stale page.
+    const myToken = ++pdfLoadToken;
+    pdfDoc = null;
+    totalPages = 0;
+    spreadStart = 1;
+    journalStatus.textContent = "PDF yuklanmoqda...";
+
     try {
         const loadingTask = pdfjsLib.getDocument(PDF_URL);
-        pdfDoc = await loadingTask.promise;
-        totalPages = pdfDoc.numPages;
+        const loadedDoc = await loadingTask.promise;
+        if (myToken !== pdfLoadToken) {
+            loadedDoc.destroy();
+            return;
+        }
+        pdfDoc = loadedDoc;
+        totalPages = loadedDoc.numPages;
         pageInput.max = String(totalPages);
         await renderSpread(1);
     } catch (error) {
-        journalStatus.textContent = "PDF faylni ochib bo'lmadi";
+        if (myToken === pdfLoadToken) {
+            journalStatus.textContent = "PDF faylni ochib bo'lmadi";
+        }
         console.error(error);
     }
 }
 
+function formatIssueLabel(entry) {
+    return `${entry.year}-yil, ${entry.issue}-son`;
+}
+
+function syncCurrentIssueLabel() {
+    if (viewerCurrentIssue) {
+        viewerCurrentIssue.textContent = formatIssueLabel(currentIssue);
+    }
+    if (pdfLink) {
+        pdfLink.href = currentIssue.file;
+    }
+    if (archiveContainer) {
+        archiveContainer.querySelectorAll(".issue-chip").forEach((chip) => {
+            const active = chip.dataset.file === currentIssue.file;
+            chip.classList.toggle("is-active", active);
+            chip.setAttribute("aria-pressed", String(active));
+        });
+    }
+}
+
+async function selectIssue(entry, { scroll = false } = {}) {
+    currentIssue = entry;
+    PDF_URL = entry.file;
+    syncCurrentIssueLabel();
+    if (scroll && journalViewer) {
+        journalViewer.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    await loadPdf();
+}
+
+function renderArchive() {
+    if (!archiveContainer) {
+        return;
+    }
+
+    archiveContainer.innerHTML = "";
+
+    const years = [...new Set(JOURNAL_ISSUES.map((entry) => entry.year))];
+
+    years.forEach((year) => {
+        const yearBlock = document.createElement("div");
+        yearBlock.className = "archive-year";
+
+        const label = document.createElement("div");
+        label.className = "archive-year-label";
+        label.textContent = String(year);
+
+        const issues = document.createElement("div");
+        issues.className = "archive-year-issues";
+
+        JOURNAL_ISSUES
+            .filter((entry) => entry.year === year)
+            .forEach((entry) => {
+                const chip = document.createElement("button");
+                chip.type = "button";
+                chip.className = "issue-chip";
+                chip.dataset.file = entry.file;
+                chip.setAttribute("aria-pressed", "false");
+                chip.textContent = `${entry.issue}-son`;
+                chip.addEventListener("click", () => selectIssue(entry, { scroll: true }));
+                issues.append(chip);
+            });
+
+        yearBlock.append(label, issues);
+        archiveContainer.append(yearBlock);
+    });
+
+    syncCurrentIssueLabel();
+}
+
 // ===== Init =====
 renderBoard();
-loadPdf();
+renderArchive();
+selectIssue(currentIssue);
 syncFullscreenButton();
 syncViewModeUI();
 syncReaderControls();
