@@ -78,6 +78,7 @@ const board = [
     { name: "Nilufar Isakulova", degree: "Pedagogika fanlari doktori (DSc), professor" },
     { name: "Muhammadjon Quronov", degree: "Pedagogika fanlari doktori, professor" },
     { name: "Absalom Umarov", degree: "Sotsiologiya fanlari doktori, professor" },
+    { name: "Sevil Kerimova", degree: "San'atshunoslik fanlari bo'yicha falsafa doktori (PhD), dotsent" },
     { name: "Aziza Kurbanova", degree: "Pedagogika fanlari doktori (DSc), dotsent" },
     { name: "Zumriniso Kozimova", degree: "Filologiya fanlari bo'yicha falsafa doktori (PhD), dotsent" },
     { name: "Shahlo Hamidova", degree: "San'atshunoslik fanlari bo'yicha falsafa doktori" },
