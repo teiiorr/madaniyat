@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — O'zbekiston madaniyati va san'ati</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="/assets/logo.png">
+    <link rel="stylesheet" href="/src/styles/admin.css">
+</head>
+<body>
+    <!-- Login screen -->
+    <div id="login-shell" class="login-shell">
+        <form id="login-form" class="login-card">
+            <h1>Admin panel</h1>
+            <p>Maqolalarni boshqarish uchun tizimga kiring.</p>
+            <div class="form-grid">
+                <div class="form-row">
+                    <label class="form-label" for="login-email">Email</label>
+                    <input id="login-email" type="email" autocomplete="username" required>
+                </div>
+                <div class="form-row">
+                    <label class="form-label" for="login-password">Parol</label>
+                    <input id="login-password" type="password" autocomplete="current-password" required>
+                </div>
+                <div id="login-status" class="form-status" hidden></div>
+                <button class="btn btn-primary" type="submit">Kirish</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- App shell -->
+    <div id="admin-shell" class="admin-app" hidden>
+        <header class="admin-header">
+            <div class="brand">
+                <img src="/assets/logo.png" alt="">
+                <h1>O'zbekiston madaniyati va san'ati — Maqolalar</h1>
+            </div>
+            <div class="admin-user">
+                <span id="user-email"></span>
+                <button id="logout-btn" type="button">Chiqish</button>
+            </div>
+        </header>
+
+        <main class="admin-main">
+            <aside class="panel">
+                <div class="panel-head">
+                    <h2>Maqolalar</h2>
+                    <button id="new-article-btn" class="btn btn-primary" type="button" style="padding: 6px 12px; font-size: 13px;">+ Yangi</button>
+                </div>
+                <div class="list-filter">
+                    <input id="list-filter" type="search" placeholder="Qidirish...">
+                </div>
+                <ul id="article-list" class="article-list"></ul>
+            </aside>
+
+            <section class="panel">
+                <div id="editor-empty" class="form-empty">
+                    <h3>Maqola tanlanmagan</h3>
+                    <p>Chapdan mavjud maqolani tanlang yoki «+ Yangi» tugmasini bosing.</p>
+                </div>
+
+                <div id="article-editor" class="panel-body" hidden>
+                    <div id="form-status" class="form-status" hidden></div>
+
+                    <form id="article-form" novalidate>
+                        <input type="hidden" name="id">
+
+                        <div class="form-grid">
+                            <div class="form-row">
+                                <label class="form-label" for="f-title">Sarlavha <span class="hint">majburiy</span></label>
+                                <input id="f-title" type="text" name="title" required>
+                            </div>
+
+                            <div class="form-row-inline">
+                                <div class="form-row">
+                                    <label class="form-label" for="f-slug">Slug (URL) <span class="hint">/maqola/{slug}</span></label>
+                                    <input id="f-slug" type="text" name="slug" pattern="[a-z0-9-]+" required>
+                                </div>
+                                <div class="form-row">
+                                    <label class="form-label" for="f-language">Til</label>
+                                    <select id="f-language" name="language">
+                                        <option value="uz">O'zbek</option>
+                                        <option value="kaa">Qoraqalpoq</option>
+                                        <option value="ru">Rus</option>
+                                        <option value="en">Ingliz</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <label class="form-label">Mualliflar</label>
+                                <div id="authors-list" class="authors-list"></div>
+                                <button id="add-author-btn" type="button" class="add-author-btn">+ Muallif qo'shish</button>
+                            </div>
+
+                            <div class="form-row">
+                                <label class="form-label" for="f-abstract">Annotatsiya <span class="hint">6 qatorgacha</span></label>
+                                <textarea id="f-abstract" name="abstract"></textarea>
+                            </div>
+
+                            <div class="form-row">
+                                <label class="form-label" for="f-keywords">Kalit so'zlar <span class="hint">vergul bilan ajrating</span></label>
+                                <input id="f-keywords" type="text" name="keywords" placeholder="san'at, madaniyat, pedagogika">
+                            </div>
+
+                            <div class="form-row-inline">
+                                <div class="form-row">
+                                    <label class="form-label" for="f-year">Yil</label>
+                                    <input id="f-year" type="number" name="journal_year" min="1990" max="2100">
+                                </div>
+                                <div class="form-row">
+                                    <label class="form-label" for="f-issue">Son (nomer)</label>
+                                    <input id="f-issue" type="number" name="journal_issue" min="1" max="12">
+                                </div>
+                            </div>
+
+                            <div class="form-row-inline">
+                                <div class="form-row">
+                                    <label class="form-label" for="f-fp">Boshlanish sahifasi</label>
+                                    <input id="f-fp" type="number" name="first_page" min="1">
+                                </div>
+                                <div class="form-row">
+                                    <label class="form-label" for="f-lp">Oxirgi sahifa</label>
+                                    <input id="f-lp" type="number" name="last_page" min="1">
+                                </div>
+                            </div>
+
+                            <div class="form-row-inline">
+                                <div class="form-row">
+                                    <label class="form-label" for="f-doi">DOI <span class="hint">ixtiyoriy</span></label>
+                                    <input id="f-doi" type="text" name="doi" placeholder="10.XXXXX/xxx">
+                                </div>
+                                <div class="form-row">
+                                    <label class="form-label" for="f-udk">UDK <span class="hint">ixtiyoriy</span></label>
+                                    <input id="f-udk" type="text" name="udk">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <label class="form-label" for="f-rubric">Rubrika</label>
+                                <input id="f-rubric" type="text" name="rubric" placeholder="San'atshunoslik / Pedagogika / …">
+                            </div>
+
+                            <div class="form-row">
+                                <label class="form-label" for="f-refs">Foydalanilgan adabiyotlar <span class="hint">ixtiyoriy, matn</span></label>
+                                <textarea id="f-refs" name="references_list"></textarea>
+                            </div>
+
+                            <div class="form-row">
+                                <label class="form-label">Maqola PDF</label>
+                                <div class="pdf-picker">
+                                    <input type="file" name="pdf-file" accept="application/pdf">
+                                    <div id="pdf-existing" class="pdf-existing">Fayl hali yuklanmagan</div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <label style="display: flex; gap: 8px; align-items: center; font-size: 14px;">
+                                    <input type="checkbox" name="is_published" checked>
+                                    <span>Nashr etilgan (saytda ko'rinsin)</span>
+                                </label>
+                            </div>
+
+                            <div class="button-row">
+                                <button id="delete-btn" type="button" class="btn btn-danger" hidden>O'chirish</button>
+                                <div style="display: flex; gap: 12px; margin-left: auto;">
+                                    <button type="reset" class="btn btn-ghost">Bekor</button>
+                                    <button type="submit" class="btn btn-primary">Saqlash</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="/src/scripts/admin.js"></script>
+</body>
+</html>

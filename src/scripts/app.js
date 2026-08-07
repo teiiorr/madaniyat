@@ -698,3 +698,8 @@ selectIssue(currentIssue);
 syncFullscreenButton();
 syncViewModeUI();
 syncReaderControls();
+
+// Public articles listing (Supabase-backed).
+import("./articles-public.js")
+    .then((mod) => mod.initArticlesPublic())
+    .catch((err) => console.warn("[articles-public]", err));

@@ -1,0 +1,142 @@
+.articles-toolbar {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 16px 0 20px;
+    padding: 12px;
+    background: #f7f8fb;
+    border: 1px solid #e4e6ee;
+    border-radius: 10px;
+}
+
+.articles-toolbar input[type="search"],
+.articles-toolbar select {
+    padding: 8px 12px;
+    font: inherit;
+    border: 1px solid #d5d8e2;
+    border-radius: 8px;
+    background: #fff;
+    color: inherit;
+}
+
+.articles-toolbar input[type="search"] {
+    flex: 1 1 260px;
+    min-width: 180px;
+}
+
+.articles-toolbar select {
+    flex: 0 0 auto;
+}
+
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.article-card {
+    background: #fff;
+    border: 1px solid #e4e6ee;
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.article-card:hover {
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+    transform: translateY(-1px);
+}
+
+.article-card .card-issue {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #143a86;
+    font-weight: 600;
+}
+
+.article-card .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: #12131a;
+    margin: 0;
+}
+
+.article-card .card-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.article-card .card-title a:hover {
+    color: #143a86;
+    text-decoration: underline;
+}
+
+.article-card .card-authors {
+    font-size: 13px;
+    color: #4a4e5a;
+    font-style: italic;
+    margin: 0;
+}
+
+.article-card .card-abstract {
+    font-size: 13px;
+    line-height: 1.55;
+    color: #4a4e5a;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.article-card .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding-top: 10px;
+    border-top: 1px solid #eef0f5;
+    font-size: 13px;
+}
+
+.article-card .card-pages {
+    color: #6a6f80;
+}
+
+.article-card .card-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.article-card .card-actions a {
+    color: #143a86;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.article-card .card-actions a:hover {
+    text-decoration: underline;
+}
+
+.articles-empty {
+    padding: 40px 20px;
+    text-align: center;
+    color: #6a6f80;
+    background: #f7f8fb;
+    border: 1px dashed #d5d8e2;
+    border-radius: 10px;
+    margin-top: 16px;
+}
+
+.articles-loading {
+    padding: 32px 20px;
+    text-align: center;
+    color: #6a6f80;
+    font-size: 14px;
+}

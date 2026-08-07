@@ -350,6 +350,18 @@
     opacity: 0.75;
 }
 
+.foot-credit a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: opacity 0.2s ease;
+}
+
+.foot-credit a:hover {
+    opacity: 1;
+}
+
 /* ===== Archive issues ===== */
 .archive-issues {
     margin: 10px 0 34px;

@@ -8,7 +8,7 @@
     <meta name="author" content="O'zbekiston davlat san'at va madaniyat instituti">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="googlebot" content="index, follow">
-    <link rel="canonical" href="https://uzsiac-journal.uz/">
+    <link rel="canonical" href="https://juca.uz/">
     <link rel="icon" href="/assets/logo.png">
 
     <!-- Open Graph / social -->
@@ -16,8 +16,8 @@
     <meta property="og:site_name" content="O'zbekiston madaniyati va san'ati">
     <meta property="og:title" content="O'zbekiston madaniyati va san'ati — ilmiy elektron jurnal">
     <meta property="og:description" content="OAK ro'yxatidagi ilmiy-uslubiy, nazariy-amaliy elektron jurnal. Ochiq foydalanish.">
-    <meta property="og:url" content="https://uzsiac-journal.uz/">
-    <meta property="og:image" content="https://uzsiac-journal.uz/assets/madaniyat-new.jpg">
+    <meta property="og:url" content="https://juca.uz/">
+    <meta property="og:image" content="https://juca.uz/assets/madaniyat-new.jpg">
     <meta property="og:image:width" content="2000">
     <meta property="og:image:height" content="1125">
     <meta property="og:locale" content="uz_UZ">
@@ -26,7 +26,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="O'zbekiston madaniyati va san'ati — ilmiy elektron jurnal">
     <meta name="twitter:description" content="OAK ro'yxatidagi ilmiy-uslubiy, nazariy-amaliy elektron jurnal.">
-    <meta name="twitter:image" content="https://uzsiac-journal.uz/assets/madaniyat-new.jpg">
+    <meta name="twitter:image" content="https://juca.uz/assets/madaniyat-new.jpg">
 
     <!-- Google Scholar / Highwire Press citation metadata -->
     <meta name="citation_journal_title" content="O'zbekiston madaniyati va san'ati">
@@ -37,10 +37,10 @@
     <meta name="citation_publication_date" content="2026">
     <meta name="citation_date" content="2026">
     <meta name="citation_language" content="uz">
-    <meta name="citation_abstract_html_url" content="https://uzsiac-journal.uz/">
-    <meta name="citation_pdf_url" content="https://uzsiac-journal.uz/assets/journal/2026-3.pdf">
+    <meta name="citation_abstract_html_url" content="https://juca.uz/">
+    <meta name="citation_pdf_url" content="https://juca.uz/assets/journal/2026-3.pdf">
     <!-- Future DOI (after Crossref registration), add per issue, e.g.:
-    <meta name="citation_doi" content="10.XXXXX/uzsiac-journal.2026.3"> -->
+    <meta name="citation_doi" content="10.XXXXX/juca.2026.3"> -->
 
     <!-- Dublin Core -->
     <meta name="DC.title" content="O'zbekiston madaniyati va san'ati">
@@ -59,17 +59,17 @@
       "name": "O'zbekiston madaniyati va san'ati",
       "issn": "3093-8597",
       "inLanguage": ["uz", "ru", "en"],
-      "url": "https://uzsiac-journal.uz/",
+      "url": "https://juca.uz/",
       "publisher": {
         "@type": "Organization",
         "name": "O'zbekiston davlat san'at va madaniyat instituti",
-        "url": "https://uzsiac-journal.uz/"
+        "url": "https://juca.uz/"
       },
       "hasPart": {
         "@type": "PublicationIssue",
         "issueNumber": "3",
         "datePublished": "2026",
-        "url": "https://uzsiac-journal.uz/assets/journal/2026-3.pdf"
+        "url": "https://juca.uz/assets/journal/2026-3.pdf"
       }
     }
     </script>
@@ -108,7 +108,8 @@
                 <a href="#talablar"><span class="rail-nav-num">03</span> Mualliflarga</a>
                 <a href="#tahririyat"><span class="rail-nav-num">04</span> Tahririyat</a>
                 <a href="#arxiv"><span class="rail-nav-num">05</span> Arxiv</a>
-                <a href="#aloqa"><span class="rail-nav-num">06</span> Aloqa</a>
+                <a href="#maqolalar"><span class="rail-nav-num">06</span> Maqolalar</a>
+                <a href="#aloqa"><span class="rail-nav-num">07</span> Aloqa</a>
             </nav>
 
             <div class="rail-foot">
@@ -302,10 +303,35 @@
                 </div>
             </section>
 
-            <!-- 06 — Aloqa -->
-            <section class="sec" id="aloqa">
+            <!-- 06 — Maqolalar -->
+            <section class="sec" id="maqolalar">
                 <header class="sec-head">
                     <span class="sec-num">06</span>
+                    <h2 class="sec-title">Maqolalar</h2>
+                </header>
+
+                <p class="sec-lead">Alohida ilmiy maqolalarni yuklab olishingiz mumkin. Mualliflar, sonlar va kalit so'zlar bo'yicha filtrlang.</p>
+
+                <div class="articles-toolbar">
+                    <input id="articles-search" type="search" placeholder="Sarlavha yoki muallif...">
+                    <select id="articles-year"><option value="">Yil</option></select>
+                    <select id="articles-language">
+                        <option value="">Til</option>
+                        <option value="uz">O'zbek</option>
+                        <option value="kaa">Qoraqalpoq</option>
+                        <option value="ru">Rus</option>
+                        <option value="en">Ingliz</option>
+                    </select>
+                </div>
+
+                <div id="articles-grid" class="articles-grid" aria-live="polite"></div>
+                <div id="articles-empty" class="articles-empty" hidden>Hozircha maqolalar yo'q.</div>
+            </section>
+
+            <!-- 07 — Aloqa -->
+            <section class="sec" id="aloqa">
+                <header class="sec-head">
+                    <span class="sec-num">07</span>
                     <h2 class="sec-title">Aloqa</h2>
                 </header>
 
@@ -325,7 +351,7 @@
                 </div>
 
                 <p class="foot-note">© «O'zbekiston madaniyati va san'ati» elektron jurnali. Maqoladagi ma'lumotlar to'g'riligi va ilgari surilgan g'oya uchun muallif javobgardir.</p>
-                <p class="foot-credit">Designed &amp; developed by teiior</p>
+                <p class="foot-credit">Designed &amp; developed by <a href="https://teiior.uz" target="_blank" rel="noopener noreferrer">teiior</a></p>
             </section>
         </main>
     </div>
