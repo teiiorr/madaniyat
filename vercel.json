@@ -1,14 +1,18 @@
 {
     "rewrites": [
-        {
-            "source": "/:path((?!api/|assets/|.*\\..*).*)",
-            "has": [{ "type": "host", "value": "admin.juca.uz" }],
-            "destination": "/admin.html"
-        },
+        { "source": "/sitemap.xml", "destination": "/api/sitemap" },
+        { "source": "/maqola", "destination": "/api/maqola-index" },
+        { "source": "/maqola/", "destination": "/api/maqola-index" },
         { "source": "/maqola/:slug", "destination": "/api/article/:slug" },
         { "source": "/maqola/:slug/", "destination": "/api/article/:slug" }
     ],
     "redirects": [
+        {
+            "source": "/",
+            "has": [{ "type": "host", "value": "admin.juca.uz" }],
+            "destination": "/admin.html",
+            "permanent": false
+        },
         {
             "source": "/admin",
             "destination": "/admin.html",
@@ -17,13 +21,13 @@
         {
             "source": "/admin.html",
             "has": [{ "type": "host", "value": "juca.uz" }],
-            "destination": "https://admin.juca.uz/",
+            "destination": "https://admin.juca.uz/admin.html",
             "permanent": false
         },
         {
             "source": "/admin.html",
             "has": [{ "type": "host", "value": "www.juca.uz" }],
-            "destination": "https://admin.juca.uz/",
+            "destination": "https://admin.juca.uz/admin.html",
             "permanent": false
         }
     ]
