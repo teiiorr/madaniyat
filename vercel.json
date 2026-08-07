@@ -1,7 +1,7 @@
 {
     "rewrites": [
         {
-            "source": "/",
+            "source": "/:path((?!api/|assets/|.*\\..*).*)",
             "has": [{ "type": "host", "value": "admin.juca.uz" }],
             "destination": "/admin.html"
         },
