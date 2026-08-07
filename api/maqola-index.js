@@ -57,7 +57,9 @@ const STYLES = `
     :root[data-theme="dark"] body { background: var(--paper); color: var(--ink-2); }
     :root[data-theme="dark"] .search-bar input,
     :root[data-theme="dark"] .search-bar select {
-        background: var(--paper-2); color: var(--ink-2); border-color: var(--hair);
+        background-color: var(--paper-2);
+        color: var(--ink-2);
+        border-color: var(--hair);
     }
     :root[data-theme="dark"] .search-bar select {
         background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%238892a3' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
