@@ -405,7 +405,6 @@ export default async function handler(req, res) {
         </nav>
         <div class="page-eyebrow">Ilmiy nashr · ${articles.length} maqola</div>
         <h1 class="page-title">Maqolalar</h1>
-        <p class="page-lead">Jurnalning barcha nashr etilgan ilmiy maqolalari. Har bir maqolada Google Scholar mos meta-ma'lumot va to'liq PDF matn.</p>
     </section>
 
     <section class="listing-wrap">
