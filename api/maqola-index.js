@@ -34,9 +34,38 @@ const STYLES = `
         --navy-deep: #08203d;
         --gold: #a8842f;
         --gold-deep: #7f6323;
+        --footer-bg: #08203d;
+        --footer-text: #ffffff;
         --serif: "Source Serif 4", "Source Serif Pro", "Georgia", serif;
         --sans: "Sora", system-ui, -apple-system, sans-serif;
     }
+    :root[data-theme="dark"] {
+        color-scheme: dark;
+        --paper: #0a0e1a;
+        --paper-2: #12172a;
+        --ink: #e8ecf5;
+        --ink-2: #d0d5e2;
+        --muted: #8892a3;
+        --hair: #26304a;
+        --navy: #7ba8db;
+        --navy-dark: #5f8fc5;
+        --gold: #d4a952;
+        --gold-deep: #b48a3e;
+        --footer-bg: #050810;
+        --footer-text: #ffffff;
+    }
+    :root[data-theme="dark"] body { background: var(--paper); color: var(--ink-2); }
+    :root[data-theme="dark"] .search-bar input,
+    :root[data-theme="dark"] .search-bar select {
+        background: var(--paper-2); color: var(--ink-2); border-color: var(--hair);
+    }
+    :root[data-theme="dark"] .search-bar select {
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%238892a3' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    }
+    :root[data-theme="dark"] .theme-toggle .sun { display: inline; }
+    :root[data-theme="dark"] .theme-toggle .moon { display: none; }
+    .theme-toggle .sun { display: none; }
+    .theme-toggle .moon { display: inline; }
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -71,7 +100,27 @@ const STYLES = `
         border-bottom: 1px solid var(--hair);
         position: sticky; top: 0; z-index: 10;
     }
-    .top-nav-inner { max-width: 1180px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; }
+    .top-nav-inner {
+        max-width: 1180px; margin: 0 auto;
+        display: flex; flex-wrap: wrap;
+        justify-content: center; position: relative;
+    }
+    .theme-toggle {
+        position: absolute; right: 1rem; top: 50%;
+        transform: translateY(-50%);
+        background: transparent; border: 1px solid var(--hair);
+        border-radius: 999px;
+        padding: 0.375rem 0.625rem;
+        cursor: pointer; color: var(--muted);
+        font-size: 0.875rem; line-height: 1;
+        transition: color 0.2s, border-color 0.2s;
+        display: inline-flex; align-items: center; justify-content: center;
+        min-width: 2rem; min-height: 2rem;
+    }
+    .theme-toggle:hover { color: var(--navy); border-color: var(--navy); }
+    @media (max-width: 720px) {
+        .theme-toggle { position: relative; right: auto; top: auto; transform: none; margin: 0.5rem; }
+    }
     .top-nav a {
         display: inline-flex; align-items: center; justify-content: center;
         padding: 1rem 1.5rem;
@@ -223,18 +272,26 @@ const STYLES = `
     .search-no-results p { font-family: var(--sans); font-size: 0.875rem; margin: 0; }
 
     .site-footer {
-        border-top: 1px solid var(--hair);
-        padding: 2.25rem 2rem;
+        background: var(--footer-bg);
+        padding: 1.5rem 2rem;
+        margin-top: 4rem;
     }
     .footer-inner {
         max-width: 1180px; margin: 0 auto;
         display: flex; justify-content: space-between; align-items: center;
         flex-wrap: wrap; gap: 1rem;
         font-family: var(--sans);
-        font-size: 0.75rem; color: var(--muted); letter-spacing: 0.05em;
+        font-size: 0.8125rem; letter-spacing: 0.04em;
+        color: var(--footer-text); font-weight: 700;
     }
-    .footer-inner a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
-    .footer-inner a:hover { color: var(--navy); }
+    .footer-inner .footer-copy { font-weight: 500; opacity: 0.7; }
+    .footer-inner a {
+        color: var(--footer-text);
+        font-weight: 700;
+        text-decoration: underline; text-underline-offset: 3px;
+        transition: color 0.2s;
+    }
+    .footer-inner a:hover { color: var(--gold); }
 
     @media (max-width: 720px) {
         body { font-size: 16px; }
@@ -299,6 +356,14 @@ export default async function handler(req, res) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        (function(){
+            try {
+                var t = localStorage.getItem("maqola-theme");
+                if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t);
+            } catch(e) {}
+        })();
+    </script>
     <style>${STYLES}</style>
 </head>
 <body>
@@ -323,6 +388,10 @@ export default async function handler(req, res) {
             <a href="/#arxiv">Arxiv</a>
             <a href="/#tahririyat">Tahririyat</a>
             <a href="/#aloqa">Aloqa</a>
+            <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Rejimni almashtirish">
+                <span class="moon" aria-hidden="true">☾</span>
+                <span class="sun" aria-hidden="true">☀</span>
+            </button>
         </div>
     </nav>
 
@@ -387,10 +456,22 @@ export default async function handler(req, res) {
 
     <footer class="site-footer">
         <div class="footer-inner">
-            <span>© ${esc(PUBLISHER)}</span>
+            <span class="footer-copy">© ${esc(PUBLISHER)}</span>
             <span>Designed &amp; developed by <a href="https://teiior.uz" target="_blank" rel="noopener noreferrer">teiior</a></span>
         </div>
     </footer>
+
+    <script>
+        (function () {
+            var btn = document.getElementById("theme-toggle");
+            if (btn) btn.addEventListener("click", function () {
+                var current = document.documentElement.getAttribute("data-theme") || "light";
+                var next = current === "dark" ? "light" : "dark";
+                document.documentElement.setAttribute("data-theme", next);
+                try { localStorage.setItem("maqola-theme", next); } catch(e) {}
+            });
+        })();
+    </script>
 </body>
 </html>`;
 

@@ -343,23 +343,29 @@
 }
 
 .foot-credit {
-    margin-top: 14px;
-    font-size: 12px;
+    display: block;
+    margin: 24px -32px -32px;
+    padding: 16px 32px;
+    background: #08203d;
+    font-size: 13px;
     letter-spacing: 0.04em;
-    color: var(--muted);
-    opacity: 0.75;
+    color: #ffffff;
+    font-weight: 700;
+    text-align: center;
+    opacity: 1;
 }
 
 .foot-credit a {
-    color: inherit;
+    color: #ffffff;
+    font-weight: 700;
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
-    transition: opacity 0.2s ease;
+    transition: color 0.2s ease;
 }
 
 .foot-credit a:hover {
-    opacity: 1;
+    color: var(--gold);
 }
 
 /* ===== Archive issues ===== */
