@@ -216,6 +216,55 @@ const STYLES = `
     }
     .empty h3 { font-family: "Sora", system-ui, sans-serif; margin: 0 0 8px; color: var(--ink); }
 
+    .search-bar {
+        display: grid;
+        grid-template-columns: 1fr minmax(200px, 260px) auto;
+        align-items: center;
+        gap: 12px;
+        margin: 0 0 22px;
+        padding: 14px 18px;
+        background: var(--paper-2);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+    }
+    @media (max-width: 720px) {
+        .search-bar { grid-template-columns: 1fr; }
+        .search-bar .search-count { text-align: left; }
+    }
+    .search-bar input, .search-bar select {
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        font: inherit; font-size: 15px;
+        background: #fff; color: var(--text);
+        transition: border-color 0.15s, box-shadow 0.15s;
+        width: 100%;
+    }
+    .search-bar select {
+        appearance: none;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%236a7382' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        padding-right: 34px;
+        cursor: pointer;
+    }
+    .search-bar input:focus, .search-bar select:focus {
+        outline: none;
+        border-color: var(--navy);
+        box-shadow: 0 0 0 3px rgba(20, 58, 107, 0.14);
+    }
+    .search-bar .search-count { font-size: 13px; color: var(--muted); font-weight: 500; min-width: 100px; text-align: right; padding: 0 4px; }
+    .search-no-results {
+        padding: 40px 20px; text-align: center;
+        color: var(--muted);
+        background: var(--paper-2);
+        border: 1px dashed var(--line);
+        border-radius: 6px;
+        display: none;
+    }
+    .search-no-results.is-visible { display: block; }
+    .search-no-results strong { font-family: "Sora", system-ui, sans-serif; color: var(--navy); }
+
     .foot-note {
         margin-top: 48px;
         padding-top: 24px;
@@ -241,17 +290,24 @@ export default async function handler(req, res) {
 
     const articles = data || [];
     const rows = articles.map((a) => {
-        const authors = Array.isArray(a.authors) ? a.authors.map((au) => au.name).filter(Boolean).join(", ") : "";
+        const authorList = Array.isArray(a.authors) ? a.authors.map((au) => au.name).filter(Boolean) : [];
+        const authors = authorList.join(", ");
         const issue = [a.journal_year, a.journal_issue && `${a.journal_issue}-son`].filter(Boolean).join(" · ");
         const pages = a.first_page ? `${a.first_page}${a.last_page ? "–" + a.last_page : ""}-bet` : "";
         const meta = [issue, pages].filter(Boolean).join(" · ");
-        return `<article class="listing-item">
+        return `<article class="listing-item" data-authors="${esc(authorList.join("|"))}">
             ${meta ? `<span class="issue-badge">${esc(meta)}</span>` : ""}
             <h2><a href="/maqola/${esc(encodeURIComponent(a.slug))}">${esc(a.title)}</a></h2>
             ${authors ? `<p class="authors">${esc(authors)}</p>` : ""}
             ${a.abstract ? `<p class="abstract">${esc(a.abstract.slice(0, 280))}${a.abstract.length > 280 ? "…" : ""}</p>` : ""}
         </article>`;
     }).join("\n");
+
+    // Unique authors across all articles for the dropdown
+    const uniqueAuthors = [...new Set(
+        articles.flatMap((a) => Array.isArray(a.authors) ? a.authors.map((au) => au.name).filter(Boolean) : [])
+    )].sort((a, b) => a.localeCompare(b, "uz"));
+    const authorOptions = uniqueAuthors.map((name) => `<option value="${esc(name)}">${esc(name)}</option>`).join("");
 
     const html = `<!DOCTYPE html>
 <html lang="uz">
@@ -309,9 +365,56 @@ export default async function handler(req, res) {
 
             <p class="sec-lead">${esc(JOURNAL_TITLE)} — chop etilgan barcha ilmiy maqolalar. Har bir maqola alohida sahifada, to'liq metama'lumot va PDF matn bilan.</p>
 
-            ${articles.length
-                ? `<div class="articles-list">${rows}</div>`
-                : `<div class="empty"><h3>Maqolalar hali qo'shilmagan</h3><p>Yangi sonlar tez orada shu yerda paydo bo'ladi.</p></div>`}
+            ${articles.length ? `
+            <div class="search-bar" role="search">
+                <input type="search" id="live-search" placeholder="Sarlavha, muallif yoki matn bo'yicha qidiring…" autocomplete="off" aria-label="Maqolalarni qidirish">
+                <select id="author-filter" aria-label="Muallif bo'yicha filtrlash">
+                    <option value="">Barcha mualliflar</option>
+                    ${authorOptions}
+                </select>
+                <span class="search-count" id="search-count" aria-live="polite"></span>
+            </div>
+            <div class="articles-list" id="articles-list">${rows}</div>
+            <div class="search-no-results" id="search-no-results" role="status">
+                <strong>Hech narsa topilmadi</strong>
+                <p style="margin: 6px 0 0;">Boshqa so'z yoki muallifni tanlab ko'ring.</p>
+            </div>
+            <script>
+                (function () {
+                    var input = document.getElementById("live-search");
+                    var authorSel = document.getElementById("author-filter");
+                    var count = document.getElementById("search-count");
+                    var empty = document.getElementById("search-no-results");
+                    var items = Array.prototype.slice.call(document.querySelectorAll(".listing-item"));
+                    var total = items.length;
+
+                    function norm(s) { return (s || "").toLowerCase().trim(); }
+
+                    function apply() {
+                        var q = norm(input.value);
+                        var a = authorSel.value;
+                        var visible = 0;
+                        items.forEach(function (item) {
+                            var text = norm(item.textContent);
+                            var authors = (item.getAttribute("data-authors") || "").split("|");
+                            var matchesText = !q || text.indexOf(q) !== -1;
+                            var matchesAuthor = !a || authors.indexOf(a) !== -1;
+                            var ok = matchesText && matchesAuthor;
+                            item.style.display = ok ? "" : "none";
+                            if (ok) visible++;
+                        });
+                        count.textContent = (q || a)
+                            ? visible + " / " + total + " topildi"
+                            : total + " ta maqola";
+                        empty.classList.toggle("is-visible", visible === 0 && (q || a));
+                    }
+
+                    input.addEventListener("input", apply);
+                    authorSel.addEventListener("change", apply);
+                    apply();
+                })();
+            </script>
+            ` : `<div class="empty"><h3>Maqolalar hali qo'shilmagan</h3><p>Yangi sonlar tez orada shu yerda paydo bo'ladi.</p></div>`}
 
             <p class="foot-note">© «${esc(JOURNAL_TITLE)}» elektron jurnali. Designed &amp; developed by <a href="https://teiior.uz" target="_blank" rel="noopener noreferrer">teiior</a></p>
         </main>
