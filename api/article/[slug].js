@@ -33,11 +33,10 @@ function pdfUrl(article) {
 const STYLES = `
     :root {
         color-scheme: light;
-        --page-bg: #0a2038;
-        --rail: #0a2038;
-        --rail-2: #0d2746;
+        --page-bg: #f7f3ea;
         --paper: #f7f3ea;
         --paper-2: #fefcf7;
+        --paper-3: #fdfaef;
         --text: #25303f;
         --ink: #122039;
         --muted: #6a7382;
@@ -48,185 +47,246 @@ const STYLES = `
         --navy-deep: #08203d;
         --gold: #c9a13e;
         --gold-light: #e6c462;
+        --gold-deep: #9b7a25;
         --gold-soft: #f4e7c0;
-        --rail-text: #eae3d3;
-        --rail-muted: #8da3c2;
-        --rail-line: rgba(255, 255, 255, 0.12);
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-        background: var(--page-bg);
+        background: var(--paper-2);
         color: var(--text);
         font-family: "Onest", system-ui, -apple-system, sans-serif;
-        line-height: 1.7;
-        min-height: 100vh;
+        line-height: 1.75;
+        font-size: 17px;
+        -webkit-font-smoothing: antialiased;
     }
-    .ms-shell { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
-    @media (max-width: 900px) { .ms-shell { grid-template-columns: 1fr; } }
 
-    .rail {
-        background: var(--rail); color: var(--rail-text);
-        padding: 36px 26px;
-        display: flex; flex-direction: column; gap: 26px;
-        border-right: 1px solid var(--rail-line);
+    /* Topbar */
+    .topbar {
+        background: var(--navy-deep);
+        color: #fff;
+        padding: 1rem 2rem;
+        position: sticky; top: 0; z-index: 10;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
-    @media (max-width: 900px) { .rail { padding: 20px; } }
-
-    .rail-brand {
-        display: flex; gap: 12px; align-items: flex-start;
-        text-decoration: none; color: inherit;
-        padding-bottom: 20px; border-bottom: 1px solid var(--rail-line);
+    .topbar-inner {
+        max-width: 1400px; margin: 0 auto;
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 1.5rem; flex-wrap: wrap;
     }
-    .rail-brand img { width: 44px; height: 44px; filter: brightness(0) invert(1); opacity: 0.9; }
-    .rail-brand strong { font-family: "Sora", system-ui, sans-serif; font-size: 15px; font-weight: 700; display: block; line-height: 1.3; }
-    .rail-brand em { font-style: normal; font-size: 11.5px; color: var(--rail-muted); text-transform: uppercase; letter-spacing: 0.07em; display: block; margin-top: 4px; }
-
-    .rail-nav { display: flex; flex-direction: column; gap: 4px; }
-    .rail-nav a {
-        display: flex; align-items: center; gap: 12px;
-        padding: 10px 12px; color: var(--rail-text);
-        text-decoration: none; font-size: 14px; border-radius: 4px;
-        transition: background 0.2s, color 0.2s;
+    .topbar-brand { display: flex; align-items: center; gap: 0.875rem; text-decoration: none; color: inherit; }
+    .topbar-brand img { width: 42px; height: 42px; filter: brightness(0) invert(1); opacity: 0.95; }
+    .topbar-brand-text { display: flex; flex-direction: column; gap: 2px; }
+    .topbar-brand strong { font-family: "Sora", system-ui, sans-serif; font-size: 0.9375rem; font-weight: 700; line-height: 1.2; }
+    .topbar-brand em { font-style: normal; font-size: 0.6875rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.08em; }
+    .topbar-nav { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .topbar-nav a {
+        color: rgba(255, 255, 255, 0.75); text-decoration: none;
+        font-size: 0.8125rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.07em;
+        padding: 0.5rem 0;
+        border-bottom: 2px solid transparent;
+        transition: color 0.2s, border-color 0.2s;
     }
-    .rail-nav a:hover { background: var(--rail-2); color: #fff; }
-    .rail-nav a.is-current { background: var(--rail-2); color: var(--gold-light); }
-    .rail-nav a .num { color: var(--gold); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; min-width: 22px; }
-
-    .rail-foot {
-        margin-top: auto; padding-top: 20px;
-        border-top: 1px solid var(--rail-line);
-        font-size: 12px; color: var(--rail-muted);
-    }
-    .rail-cta {
-        display: inline-block; padding: 10px 16px;
+    .topbar-nav a:hover { color: #fff; }
+    .topbar-nav a.is-current { color: var(--gold-light); border-bottom-color: var(--gold); }
+    .topbar-cta {
         background: var(--gold); color: var(--navy-deep) !important;
-        border-radius: 4px; text-decoration: none;
-        font-weight: 700; font-size: 13px; text-align: center;
+        padding: 0.5rem 1rem; border-radius: 4px;
+        font-size: 0.75rem !important; font-weight: 800 !important;
+        border-bottom: none !important;
+        text-transform: uppercase; letter-spacing: 0.08em;
     }
+    .topbar-cta:hover { background: var(--gold-light); }
 
-    .main {
-        background: var(--paper);
-        padding: 48px 56px 64px;
-        min-height: 100vh;
+    /* Cover */
+    .article-cover {
+        padding: 4rem 2rem 3rem;
+        background:
+            radial-gradient(circle at 15% 30%, rgba(201, 161, 62, 0.06), transparent 50%),
+            var(--paper);
+        border-bottom: 1px solid var(--line);
     }
-    @media (max-width: 900px) { .main { padding: 32px 22px 48px; } }
-
-    .article-frame {
-        max-width: 820px;
-        margin: 0 auto;
-    }
+    .article-cover-inner { max-width: 820px; margin: 0 auto; }
 
     .breadcrumb {
-        display: flex; flex-wrap: wrap; gap: 8px;
-        font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em;
-        color: var(--muted); margin-bottom: 24px;
+        display: flex; flex-wrap: wrap; gap: 0.5rem;
+        font-size: 0.75rem; font-weight: 600;
+        letter-spacing: 0.09em; text-transform: uppercase;
+        color: var(--muted); margin-bottom: 1.5rem;
     }
     .breadcrumb a { color: var(--muted); text-decoration: none; }
     .breadcrumb a:hover { color: var(--navy); }
     .breadcrumb strong { color: var(--navy); }
+    .breadcrumb span.sep { opacity: 0.4; }
 
-    .article-meta-strip {
+    .meta-line {
         display: inline-block;
-        padding: 4px 12px;
+        padding: 0.4375rem 0.875rem;
         background: var(--navy-deep);
         color: var(--gold-light);
-        font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+        font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.11em;
         font-weight: 700; border-radius: 3px;
-        margin-bottom: 14px;
+        margin-bottom: 1.25rem;
     }
     h1.article-title {
         font-family: "Sora", system-ui, sans-serif;
-        font-size: clamp(26px, 3vw, 36px);
-        line-height: 1.2;
-        margin: 0 0 14px;
+        font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+        line-height: 1.15;
+        margin: 0 0 1.25rem;
         color: var(--ink);
         font-weight: 700;
-        letter-spacing: -0.015em;
+        letter-spacing: -0.025em;
     }
-    .article-rubric {
-        display: inline-block; padding: 4px 12px;
-        border: 1px solid var(--gold); color: var(--gold-deep);
-        font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
-        font-weight: 700; border-radius: 3px;
+    .rubric-tag {
+        display: inline-block;
+        padding: 0.375rem 0.875rem;
+        border: 1.5px solid var(--gold);
+        color: var(--gold-deep);
+        font-size: 0.6875rem; font-weight: 800;
+        text-transform: uppercase; letter-spacing: 0.1em;
+        border-radius: 2px;
     }
 
-    .article-authors {
-        display: grid; gap: 14px;
-        margin: 26px 0;
-        padding: 22px 24px;
+    /* Body */
+    .article-body {
         background: var(--paper-2);
-        border-left: 3px solid var(--gold);
+        padding: 3rem 2rem 4rem;
+    }
+    .article-body-inner { max-width: 820px; margin: 0 auto; }
+
+    .article-authors {
+        display: grid; gap: 1.125rem;
+        margin: 0 0 2.5rem;
+        padding: 1.75rem 2rem;
+        background: var(--paper);
+        border-left: 4px solid var(--gold);
         border-radius: 4px;
     }
-    .author { display: grid; gap: 4px; font-size: 14px; }
-    .author strong { font-family: "Sora", system-ui, sans-serif; font-size: 15.5px; color: var(--ink); font-weight: 600; }
-    .author span { color: var(--muted); font-style: italic; }
-    .author a { color: var(--navy); text-decoration: none; font-size: 13px; }
-    .author a:hover { text-decoration: underline; }
+    .author { display: grid; gap: 0.25rem; }
+    .author strong {
+        font-family: "Sora", system-ui, sans-serif;
+        font-size: 1.0625rem; color: var(--ink); font-weight: 600;
+        letter-spacing: -0.005em;
+    }
+    .author span { color: var(--muted); font-style: italic; font-size: 0.9375rem; }
+    .author a {
+        color: var(--navy); text-decoration: none;
+        font-size: 0.875rem; font-weight: 500;
+        margin-top: 0.125rem; display: inline-block;
+    }
+    .author a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
     h2.section-title {
         font-family: "Sora", system-ui, sans-serif;
-        font-size: 16px; text-transform: uppercase; letter-spacing: 0.08em;
+        font-size: 0.9375rem; text-transform: uppercase; letter-spacing: 0.12em;
         color: var(--navy); font-weight: 700;
-        margin: 32px 0 14px;
-        padding-bottom: 8px;
+        margin: 2.75rem 0 1rem;
+        padding-bottom: 0.75rem;
         border-bottom: 1px solid var(--line);
     }
 
     .article-abstract p, .article-keywords p {
         color: var(--text);
-        font-size: 15.5px;
-        line-height: 1.8;
+        font-size: 1.0625rem; line-height: 1.9;
         margin: 0;
     }
-    .article-keywords p { font-style: italic; color: var(--muted); }
+    .article-keywords p {
+        font-style: italic; color: #4a5460;
+        padding: 0.875rem 1.25rem;
+        background: var(--paper);
+        border-radius: 4px;
+    }
 
-    .article-doi { font-size: 14px; margin: 12px 0; color: var(--muted); }
+    .article-doi {
+        font-size: 0.9375rem; margin: 1rem 0 0; color: var(--muted);
+        padding: 0.875rem 1.125rem;
+        background: var(--paper);
+        border-radius: 4px;
+        border-left: 3px solid var(--gold-soft);
+    }
+    .article-doi strong { color: var(--ink); }
     .article-doi a { color: var(--navy); font-weight: 600; text-decoration: none; }
     .article-doi a:hover { text-decoration: underline; }
 
     .article-pdf {
-        display: flex; align-items: center; gap: 16px;
-        margin: 32px 0;
-        padding: 22px 24px;
-        background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
-        border-radius: 6px; color: #fff;
+        display: flex; align-items: center; gap: 1.25rem;
+        margin: 3rem 0;
+        padding: 1.75rem 2rem;
+        background:
+            radial-gradient(circle at 15% 20%, rgba(255,255,255,0.08), transparent 50%),
+            linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+        border-radius: 8px;
+        color: #fff;
+        box-shadow: 0 12px 32px rgba(8, 26, 48, 0.18);
     }
-    .article-pdf .icon { font-size: 30px; }
+    .article-pdf .icon {
+        font-size: 2rem; width: 3rem; height: 3rem;
+        display: grid; place-items: center;
+        background: rgba(255,255,255,0.1);
+        border-radius: 8px;
+    }
     .article-pdf .txt { flex: 1; }
-    .article-pdf .txt strong { display: block; font-family: "Sora", system-ui, sans-serif; font-size: 16px; }
-    .article-pdf .txt small { display: block; font-size: 12.5px; opacity: 0.8; margin-top: 2px; }
+    .article-pdf .txt strong {
+        display: block;
+        font-family: "Sora", system-ui, sans-serif;
+        font-size: 1.0625rem; font-weight: 700;
+    }
+    .article-pdf .txt small {
+        display: block;
+        font-size: 0.8125rem; opacity: 0.85; margin-top: 0.25rem;
+    }
     .article-pdf a.download {
-        padding: 12px 22px;
+        padding: 0.75rem 1.375rem;
         background: var(--gold);
         color: var(--navy-deep);
         border-radius: 4px; text-decoration: none;
-        font-weight: 700; font-size: 13px;
-        text-transform: uppercase; letter-spacing: 0.08em;
-        transition: background 0.2s;
+        font-weight: 700; font-size: 0.8125rem;
+        text-transform: uppercase; letter-spacing: 0.1em;
+        transition: background 0.2s, transform 0.15s;
+        white-space: nowrap;
     }
-    .article-pdf a.download:hover { background: var(--gold-light); }
+    .article-pdf a.download:hover { background: var(--gold-light); transform: translateY(-1px); }
 
     .article-refs pre {
         white-space: pre-wrap; word-break: break-word;
-        background: var(--paper-2);
+        background: var(--paper);
         border: 1px solid var(--line);
-        padding: 18px 20px;
+        padding: 1.5rem 1.75rem;
         border-radius: 4px;
         font-family: "Georgia", "Times New Roman", serif;
-        font-size: 13.5px; line-height: 1.75;
+        font-size: 0.9375rem;
+        line-height: 1.85;
         color: var(--text);
+        margin: 0;
     }
 
-    .foot-note {
-        margin-top: 48px;
-        padding-top: 24px;
-        border-top: 1px solid var(--line);
-        font-size: 12px;
-        color: var(--muted);
+    /* Footer */
+    .site-footer {
+        background: var(--navy-deep);
+        color: rgba(255, 255, 255, 0.6);
+        padding: 2rem;
     }
-    .foot-note a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+    .footer-inner {
+        max-width: 1400px; margin: 0 auto;
+        display: flex; justify-content: space-between; align-items: center;
+        flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-inner .foot-brand { font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase; }
+    .foot-credit { font-size: 0.75rem; margin: 0; }
+    .foot-credit a { color: var(--gold-light); text-decoration: underline; text-underline-offset: 3px; }
+
+    @media (max-width: 720px) {
+        body { font-size: 16px; }
+        .topbar { padding: 0.875rem 1.25rem; }
+        .topbar-nav { gap: 1rem; }
+        .article-cover { padding: 2.5rem 1.25rem 2rem; }
+        .article-body { padding: 2rem 1.25rem 3rem; }
+        .article-pdf { flex-direction: column; align-items: flex-start; padding: 1.5rem; }
+        .article-authors { padding: 1.25rem 1.5rem; }
+        .site-footer { padding: 1.5rem 1.25rem; }
+    }
 `;
 
 function renderHtml(article) {
@@ -254,11 +314,12 @@ function renderHtml(article) {
         : "";
     const pdfMeta = pdfHref ? `    <meta name="citation_pdf_url" content="${esc(pdfHref)}">` : "";
 
-    const metaStrip = [
+    const metaParts = [
         article.journal_year && `${article.journal_year}`,
         article.journal_issue && `${article.journal_issue}-son`,
         article.first_page && `${article.first_page}${article.last_page ? "–" + article.last_page : ""}-bet`
-    ].filter(Boolean).join(" · ");
+    ].filter(Boolean);
+    const metaLineTxt = metaParts.join(" · ");
 
     const authorsBlock = authors.length ? `<section class="article-authors">${authors.map((a) => `
         <div class="author">
@@ -271,7 +332,7 @@ function renderHtml(article) {
     const abstractHtml = article.abstract
         ? `<section class="article-abstract"><h2 class="section-title">Annotatsiya</h2><p>${esc(article.abstract)}</p></section>` : "";
     const keywordsHtml = Array.isArray(article.keywords) && article.keywords.length
-        ? `<section class="article-keywords"><h2 class="section-title">Kalit so'zlar</h2><p>${esc(article.keywords.join(", "))}</p></section>` : "";
+        ? `<section class="article-keywords"><h2 class="section-title">Kalit so'zlar</h2><p>${esc(article.keywords.join(" · "))}</p></section>` : "";
     const refsHtml = article.references_list
         ? `<section class="article-refs"><h2 class="section-title">Foydalanilgan adabiyotlar</h2><pre>${esc(article.references_list)}</pre></section>` : "";
     const doiHtml = article.doi
@@ -334,57 +395,58 @@ ${keywordsMeta}
     <style>${STYLES}</style>
 </head>
 <body>
-    <div class="ms-shell">
-        <aside class="rail">
-            <a class="rail-brand" href="/">
+    <header class="topbar">
+        <div class="topbar-inner">
+            <a class="topbar-brand" href="/">
                 <img src="/assets/logo.png" alt="">
-                <span>
-                    <strong>O'zbekiston madaniyati<br>va san'ati</strong>
-                    <em>Ilmiy elektron jurnal</em>
+                <span class="topbar-brand-text">
+                    <strong>O'zbekiston madaniyati va san'ati</strong>
+                    <em>ISSN ${ISSN} · OAK ro'yxatida</em>
                 </span>
             </a>
-            <nav class="rail-nav">
-                <a href="/#haqida"><span class="num">01</span> Jurnal haqida</a>
-                <a href="/#maqsad"><span class="num">02</span> Maqsad va ruknlar</a>
-                <a href="/#talablar"><span class="num">03</span> Mualliflarga</a>
-                <a href="/#tahririyat"><span class="num">04</span> Tahririyat</a>
-                <a href="/#arxiv"><span class="num">05</span> Arxiv</a>
-                <a href="/maqola" class="is-current"><span class="num">06</span> Maqolalar</a>
-                <a href="/#aloqa"><span class="num">07</span> Aloqa</a>
+            <nav class="topbar-nav">
+                <a href="/#haqida">Haqida</a>
+                <a href="/#talablar">Mualliflarga</a>
+                <a href="/maqola" class="is-current">Maqolalar</a>
+                <a href="/#arxiv">Arxiv</a>
+                <a href="/#tahririyat">Tahririyat</a>
+                <a href="/#aloqa" class="topbar-cta">Maqola yuborish</a>
             </nav>
-            <div class="rail-foot">
-                <a class="rail-cta" href="/#aloqa">Maqola yuborish</a>
-                <p style="margin:10px 0 0;">OAK ro'yxati · 2025-yil 31-oktabr<br>№376/5 · san'atshunoslik</p>
-            </div>
-        </aside>
+        </div>
+    </header>
 
-        <main class="main">
-            <div class="article-frame">
-                <nav class="breadcrumb" aria-label="Breadcrumb">
-                    <a href="/">Asosiy sahifa</a>
-                    <span>/</span>
-                    <a href="/maqola">Maqolalar</a>
-                    <span>/</span>
-                    <strong>Maqola</strong>
-                </nav>
+    <section class="article-cover">
+        <div class="article-cover-inner">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/">Asosiy sahifa</a>
+                <span class="sep">/</span>
+                <a href="/maqola">Maqolalar</a>
+                <span class="sep">/</span>
+                <strong>Maqola</strong>
+            </nav>
+            ${metaLineTxt ? `<span class="meta-line">${esc(metaLineTxt)}</span>` : ""}
+            <h1 class="article-title">${esc(article.title)}</h1>
+            ${article.rubric ? `<span class="rubric-tag">${esc(article.rubric)}</span>` : ""}
+        </div>
+    </section>
 
-                <header>
-                    ${metaStrip ? `<span class="article-meta-strip">${esc(metaStrip)}</span>` : ""}
-                    <h1 class="article-title">${esc(article.title)}</h1>
-                    ${article.rubric ? `<span class="article-rubric">${esc(article.rubric)}</span>` : ""}
-                </header>
+    <main class="article-body">
+        <div class="article-body-inner">
+            ${authorsBlock}
+            ${doiHtml}
+            ${abstractHtml}
+            ${keywordsHtml}
+            ${pdfBlock}
+            ${refsHtml}
+        </div>
+    </main>
 
-                ${authorsBlock}
-                ${doiHtml}
-                ${abstractHtml}
-                ${keywordsHtml}
-                ${pdfBlock}
-                ${refsHtml}
-
-                <p class="foot-note">© «${esc(JOURNAL_TITLE)}» elektron jurnali. Maqoladagi ma'lumotlar to'g'riligi va ilgari surilgan g'oya uchun muallif javobgardir. Designed &amp; developed by <a href="https://teiior.uz" target="_blank" rel="noopener noreferrer">teiior</a></p>
-            </div>
-        </main>
-    </div>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <span class="foot-brand">© ${esc(PUBLISHER)}</span>
+            <p class="foot-credit">Designed &amp; developed by <a href="https://teiior.uz" target="_blank" rel="noopener noreferrer">teiior</a></p>
+        </div>
+    </footer>
 </body>
 </html>`;
 }
@@ -407,7 +469,7 @@ export default async function handler(req, res) {
     }
     if (!data) {
         res.status(404).setHeader("Content-Type", "text/html; charset=utf-8").send(
-            `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Maqola topilmadi — ${JOURNAL_TITLE_SHORT}</title></head><body style="font-family:Onest,system-ui;max-width:600px;margin:60px auto;padding:24px;text-align:center;background:#f7f3ea;"><div style="background:#fff;padding:40px;border-radius:6px;"><h1 style="color:#143a6b;">Maqola topilmadi</h1><p><a href="/maqola" style="color:#143a6b;">Barcha maqolalar</a> · <a href="/" style="color:#143a6b;">Bosh sahifa</a></p></div></body></html>`
+            `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Maqola topilmadi — ${JOURNAL_TITLE_SHORT}</title></head><body style="font-family:Onest,system-ui;max-width:600px;margin:60px auto;padding:24px;text-align:center;"><h1 style="color:#143a6b;">Maqola topilmadi</h1><p><a href="/maqola" style="color:#143a6b;">Barcha maqolalar</a> · <a href="/" style="color:#143a6b;">Bosh sahifa</a></p></body></html>`
         );
         return;
     }
