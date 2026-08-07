@@ -1,4 +1,4 @@
-import { supabase, SITE, slugify, pdfPublicUrl } from "./supabase-client.js";
+import { supabase, SITES, getSite, setSite, slugify, pdfPublicUrl } from "./supabase-client.js";
 
 const loginShell = document.getElementById("login-shell");
 const appShell = document.getElementById("admin-shell");
@@ -9,8 +9,10 @@ const loginStatus = document.getElementById("login-status");
 const logoutBtn = document.getElementById("logout-btn");
 const userEmailLabel = document.getElementById("user-email");
 
+const siteTabs = document.getElementById("site-tabs");
 const listEl = document.getElementById("article-list");
 const listFilterInput = document.getElementById("list-filter");
+const listCountEl = document.getElementById("list-count");
 const newBtn = document.getElementById("new-article-btn");
 
 const editorEl = document.getElementById("article-editor");
@@ -24,11 +26,8 @@ let currentId = null;
 // --- Auth --------------------------------------------------------------------
 async function initAuth() {
     const { data } = await supabase.auth.getSession();
-    if (data.session) {
-        showApp(data.session.user);
-    } else {
-        showLogin();
-    }
+    if (data.session) showApp(data.session.user);
+    else showLogin();
     supabase.auth.onAuthStateChange((_event, session) => {
         if (session) showApp(session.user);
         else showLogin();
@@ -44,6 +43,7 @@ function showApp(user) {
     loginShell.hidden = true;
     appShell.hidden = false;
     userEmailLabel.textContent = user.email || "";
+    renderSiteTabs();
     loadArticles();
 }
 
@@ -57,6 +57,7 @@ loginForm.addEventListener("submit", async (e) => {
     if (error) {
         loginStatus.textContent = error.message;
         loginStatus.className = "form-status err";
+        loginStatus.hidden = false;
     }
 });
 
@@ -66,13 +67,36 @@ logoutBtn.addEventListener("click", async () => {
     showEditorEmpty();
 });
 
+// --- Site tabs ---------------------------------------------------------------
+function renderSiteTabs() {
+    if (!siteTabs) return;
+    siteTabs.innerHTML = "";
+    SITES.forEach((s) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "site-tab" + (s.id === getSite() ? " is-active" : "");
+        btn.dataset.site = s.id;
+        btn.textContent = s.label;
+        btn.addEventListener("click", () => {
+            if (s.id === getSite()) return;
+            setSite(s.id);
+            currentId = null;
+            showEditorEmpty();
+            renderSiteTabs();
+            loadArticles();
+        });
+        siteTabs.append(btn);
+    });
+}
+
 // --- List --------------------------------------------------------------------
 async function loadArticles() {
     listEl.innerHTML = '<li class="article-list-empty">Yuklanmoqda...</li>';
+    if (listCountEl) listCountEl.textContent = "";
     const { data, error } = await supabase
         .from("articles")
         .select("id, title, authors, journal_year, journal_issue, is_published, published_at, updated_at")
-        .eq("site", SITE)
+        .eq("site", getSite())
         .order("updated_at", { ascending: false });
     if (error) {
         listEl.innerHTML = `<li class="article-list-empty">Xato: ${error.message}</li>`;
@@ -87,6 +111,11 @@ function renderList() {
     const items = allArticles.filter((a) =>
         !filter || (a.title || "").toLowerCase().includes(filter)
     );
+    if (listCountEl) {
+        listCountEl.textContent = filter
+            ? `${items.length} / ${allArticles.length}`
+            : `${allArticles.length}`;
+    }
     if (items.length === 0) {
         listEl.innerHTML = '<li class="article-list-empty">Maqolalar yo‘q</li>';
         return;
@@ -149,7 +178,9 @@ function fillForm(a) {
     form.reset();
     form.querySelector('[name="id"]').value = a.id || "";
     form.querySelector('[name="title"]').value = a.title || "";
-    form.querySelector('[name="slug"]').value = a.slug || "";
+    const slugField = form.querySelector('[name="slug"]');
+    slugField.value = a.slug || "";
+    delete slugField.dataset.manual;
     form.querySelector('[name="abstract"]').value = a.abstract || "";
     form.querySelector('[name="keywords"]').value = Array.isArray(a.keywords) ? a.keywords.join(", ") : "";
     form.querySelector('[name="language"]').value = a.language || "uz";
@@ -170,7 +201,6 @@ function fillForm(a) {
         : "Fayl hali yuklanmagan";
 
     renderAuthors(Array.isArray(a.authors) && a.authors.length ? a.authors : [{ name: "" }]);
-
     document.getElementById("delete-btn").hidden = !a.id;
 }
 
@@ -205,9 +235,7 @@ function makeAuthorRow(author, idx) {
         </div>
         <button type="button" class="author-remove" aria-label="Muallifni o'chirish">×</button>
     `;
-    row.querySelector(".author-remove").addEventListener("click", () => {
-        row.remove();
-    });
+    row.querySelector(".author-remove").addEventListener("click", () => row.remove());
     return row;
 }
 
@@ -244,7 +272,6 @@ function setStatus(text, kind) {
     statusBox.hidden = !text;
 }
 
-// Auto-slug when creating new
 form.querySelector('[name="title"]').addEventListener("input", (e) => {
     const slugField = form.querySelector('[name="slug"]');
     if (!currentId && !slugField.dataset.manual) {
@@ -267,7 +294,7 @@ form.addEventListener("submit", async (e) => {
 
         const fd = new FormData(form);
         const payload = {
-            site: SITE,
+            site: getSite(),
             title: fd.get("title").trim(),
             slug: (fd.get("slug") || slugify(fd.get("title") || "")).trim(),
             abstract: fd.get("abstract").trim() || null,
@@ -288,12 +315,11 @@ form.addEventListener("submit", async (e) => {
         if (!payload.title) throw new Error("Sarlavha bo'sh bo'lmasin");
         if (!payload.slug) throw new Error("Slug bo'sh bo'lmasin");
 
-        // 1. Upload PDF if a new one was picked
         const pdfInput = form.querySelector('input[name="pdf-file"]');
         const pdfFile = pdfInput.files && pdfInput.files[0];
         if (pdfFile) {
             if (pdfFile.type !== "application/pdf") throw new Error("Faqat PDF fayl");
-            const fileName = `${SITE}/${payload.slug}-${Date.now()}.pdf`;
+            const fileName = `${getSite()}/${payload.slug}-${Date.now()}.pdf`;
             const { error: upErr } = await supabase.storage
                 .from("article-pdfs")
                 .upload(fileName, pdfFile, { contentType: "application/pdf", upsert: false });
@@ -302,7 +328,6 @@ form.addEventListener("submit", async (e) => {
             payload.pdf_url = pdfPublicUrl(fileName);
         }
 
-        // 2. Insert / update
         let result;
         if (currentId) {
             result = await supabase.from("articles").update(payload).eq("id", currentId).select().single();

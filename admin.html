@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin — O'zbekiston madaniyati va san'ati</title>
+    <title>Admin — Ilmiy jurnallar</title>
     <meta name="robots" content="noindex, nofollow">
     <link rel="icon" href="/assets/logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +15,14 @@
     <!-- Login screen -->
     <div id="login-shell" class="login-shell">
         <form id="login-form" class="login-card">
-            <h1>Admin panel</h1>
+            <div class="login-brand">
+                <img src="/assets/logo.png" alt="">
+                <div>
+                    <strong>Admin panel</strong>
+                    <span>Ilmiy jurnallar boshqaruvi</span>
+                </div>
+            </div>
+            <h1>Kirish</h1>
             <p>Maqolalarni boshqarish uchun tizimga kiring.</p>
             <div class="form-grid">
                 <div class="form-row">
@@ -37,7 +44,10 @@
         <header class="admin-header">
             <a class="brand" href="/">
                 <img src="/assets/logo.png" alt="">
-                <h1>O'zbekiston madaniyati va san'ati — Maqolalar</h1>
+                <div class="brand-txt">
+                    <h1>Admin panel</h1>
+                    <span>Maqolalar boshqaruvi</span>
+                </div>
             </a>
             <div class="admin-user">
                 <span id="user-email"></span>
@@ -45,10 +55,17 @@
             </div>
         </header>
 
+        <div class="site-tabs-strip">
+            <div class="site-tabs-inner" id="site-tabs" role="tablist" aria-label="Jurnal tanlash"></div>
+        </div>
+
         <main class="admin-main">
-            <aside class="panel">
+            <aside class="panel panel-list">
                 <div class="panel-head">
-                    <h2>Maqolalar ro'yxati</h2>
+                    <div>
+                        <h2>Maqolalar</h2>
+                        <span class="panel-sub" id="list-count"></span>
+                    </div>
                     <button id="new-article-btn" class="btn btn-primary btn-sm" type="button">+ Yangi</button>
                 </div>
                 <div class="list-filter">
@@ -57,7 +74,7 @@
                 <ul id="article-list" class="article-list"></ul>
             </aside>
 
-            <section class="panel">
+            <section class="panel panel-editor">
                 <div id="editor-empty" class="form-empty">
                     <h3>Maqola tanlanmagan</h3>
                     <p>Chapdan mavjud maqolani tanlang yoki «+ Yangi» tugmasini bosing.</p>
@@ -98,7 +115,7 @@
                             <section class="form-section">
                                 <h3 class="form-section-title">Mualliflar</h3>
                                 <div id="authors-list" class="authors-list"></div>
-                                <button id="add-author-btn" type="button" class="add-author-btn" style="margin-top: 0.75rem;">+ Muallif qo'shish</button>
+                                <button id="add-author-btn" type="button" class="add-author-btn">+ Muallif qo'shish</button>
                             </section>
 
                             <section class="form-section">

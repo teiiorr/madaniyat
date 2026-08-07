@@ -1,19 +1,21 @@
-/* Admin panel — designed to stay readable and comfortable at 100–200% browser zoom.
+/* Admin panel — mobile-first, readable at 100–200% zoom.
    All sizes in rem, generous spacing, layout reflows below 1100px. */
 
 :root {
     color-scheme: light;
-    --bg: #f5f7fb;
+    --bg: #f4f6fb;
     --surface: #ffffff;
-    --surface-2: #fbfcfe;
-    --border: #e0e4ee;
-    --border-strong: #c8cede;
+    --surface-2: #fafbfd;
+    --border: #e2e6ef;
+    --border-strong: #c9cfdc;
     --text: #12131a;
     --text-2: #2a2f3a;
     --muted: #667085;
-    --primary: #143a86;
-    --primary-hover: #0f2e6c;
-    --primary-soft: #eef2ff;
+    --primary: #143a6b;
+    --primary-hover: #0d2a4a;
+    --primary-soft: #eef2f9;
+    --accent-journal: #8a2226;
+    --accent-madaniyat: #143a6b;
     --danger: #b3261e;
     --danger-soft: #fdecea;
     --success: #1c7c3c;
@@ -34,7 +36,7 @@ body {
     background: var(--bg);
     color: var(--text);
     font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
-    font-size: 0.9375rem; /* 15px @ 100%, scales with zoom */
+    font-size: 0.9375rem;
     line-height: 1.55;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
@@ -46,49 +48,88 @@ body {
 .admin-header {
     background: var(--surface);
     border-bottom: 1px solid var(--border);
-    padding: 1rem 1.75rem;
+    padding: 0.875rem 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
     flex-wrap: wrap;
-    position: sticky;
-    top: 0;
-    z-index: 20;
+    position: sticky; top: 0; z-index: 30;
 }
 .admin-header .brand { display: flex; align-items: center; gap: 0.875rem; text-decoration: none; color: inherit; }
-.admin-header .brand img { width: 2.25rem; height: 2.25rem; object-fit: contain; }
-.admin-header h1 { font-size: 1.0625rem; font-weight: 700; margin: 0; letter-spacing: -0.005em; }
-.admin-user { display: flex; align-items: center; gap: 0.875rem; font-size: 0.875rem; color: var(--muted); }
+.admin-header .brand img { width: 2.375rem; height: 2.375rem; object-fit: contain; }
+.admin-header .brand-txt { display: flex; flex-direction: column; gap: 2px; }
+.admin-header .brand-txt h1 { font-size: 1rem; font-weight: 700; margin: 0; letter-spacing: -0.005em; line-height: 1.2; }
+.admin-header .brand-txt span { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.03em; }
+
+.admin-user {
+    display: flex; align-items: center; gap: 0.875rem;
+    font-size: 0.875rem; color: var(--muted);
+    flex-wrap: wrap;
+}
 .admin-user #user-email { font-weight: 500; color: var(--text-2); }
 .admin-user button {
     background: transparent;
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-strong);
     border-radius: var(--radius-sm);
     padding: 0.4375rem 0.875rem;
-    cursor: pointer;
-    font: inherit;
-    font-size: 0.8125rem;
-    font-weight: 500;
+    cursor: pointer; font: inherit; font-size: 0.8125rem; font-weight: 500;
     color: var(--text-2);
     transition: border-color 0.15s, color 0.15s, background 0.15s;
 }
 .admin-user button:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-soft); }
 
+/* ==== Site tabs (multi-site switcher) ============================ */
+.site-tabs-strip {
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.5rem;
+    position: sticky; top: 3.75rem; z-index: 20;
+}
+.site-tabs-inner {
+    max-width: 90rem; margin: 0 auto;
+    display: flex; gap: 0.25rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.site-tabs-inner::-webkit-scrollbar { display: none; }
+.site-tab {
+    background: transparent;
+    border: 0;
+    padding: 0.875rem 1.125rem;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.8125rem; font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.06em;
+    position: relative;
+    white-space: nowrap;
+    transition: color 0.15s;
+}
+.site-tab:hover { color: var(--text-2); }
+.site-tab.is-active {
+    color: var(--primary);
+}
+.site-tab.is-active::after {
+    content: "";
+    position: absolute; left: 1.125rem; right: 1.125rem; bottom: -1px;
+    height: 2px; background: var(--primary);
+}
+
 /* ==== Layout ==================================================== */
 .admin-main {
     flex: 1;
     display: grid;
-    grid-template-columns: minmax(20rem, 24rem) 1fr;
-    gap: 1.5rem;
-    padding: 1.5rem;
-    max-width: 90rem;
-    width: 100%;
-    margin: 0 auto;
+    grid-template-columns: minmax(18rem, 22rem) 1fr;
+    gap: 1.25rem;
+    padding: 1.25rem 1.5rem 2rem;
+    max-width: 90rem; width: 100%; margin: 0 auto;
     align-items: start;
 }
 @media (max-width: 1100px) {
     .admin-main { grid-template-columns: 1fr; padding: 1rem; gap: 1rem; }
+    .panel-list { max-height: 26rem; overflow: hidden; display: flex; flex-direction: column; }
+    .panel-list .article-list { max-height: none; }
 }
 
 /* ==== Panels ==================================================== */
@@ -102,52 +143,52 @@ body {
 .panel-head {
     padding: 1rem 1.25rem;
     border-bottom: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--surface-2);
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 0.75rem; background: var(--surface-2);
 }
 .panel-head h2 { margin: 0; font-size: 0.9375rem; font-weight: 700; letter-spacing: -0.005em; }
+.panel-head .panel-sub { display: block; font-size: 0.75rem; color: var(--muted); font-weight: 500; margin-top: 2px; }
 .panel-body { padding: 1.5rem 1.5rem 1.75rem; }
 
 /* ==== Login screen ============================================== */
 .login-shell {
-    display: grid;
-    place-items: center;
+    display: grid; place-items: center;
     min-height: 100vh;
     padding: 1.5rem;
     background:
-        radial-gradient(circle at 20% 20%, rgba(20, 58, 134, 0.05), transparent 40%),
-        radial-gradient(circle at 80% 80%, rgba(185, 146, 63, 0.05), transparent 40%),
+        radial-gradient(circle at 20% 15%, rgba(20, 58, 107, 0.06), transparent 45%),
+        radial-gradient(circle at 80% 85%, rgba(185, 146, 63, 0.06), transparent 45%),
         var(--bg);
 }
 .login-card {
-    width: min(26rem, 100%);
+    width: min(28rem, 100%);
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     box-shadow: var(--shadow-lg);
     padding: 2.25rem 2rem 2rem;
 }
+.login-brand {
+    display: flex; gap: 0.875rem; align-items: center;
+    padding-bottom: 1.5rem; margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+.login-brand img { width: 2.5rem; height: 2.5rem; object-fit: contain; }
+.login-brand strong { display: block; font-size: 0.9375rem; font-weight: 700; color: var(--text); letter-spacing: -0.005em; }
+.login-brand span { display: block; font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
 .login-card h1 { font-size: 1.375rem; font-weight: 700; margin: 0 0 0.375rem; letter-spacing: -0.01em; }
 .login-card p { color: var(--muted); font-size: 0.9375rem; margin: 0 0 1.5rem; }
 
 /* ==== Article list ============================================== */
 .article-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    max-height: 68vh;
-    overflow-y: auto;
+    list-style: none; margin: 0; padding: 0;
+    max-height: 68vh; overflow-y: auto;
 }
 .article-list-item {
     padding: 0.875rem 1.25rem;
     border-bottom: 1px solid var(--border);
     cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+    display: flex; flex-direction: column; gap: 0.25rem;
     transition: background 0.12s;
 }
 .article-list-item:hover { background: var(--surface-2); }
@@ -157,25 +198,17 @@ body {
     padding-left: calc(1.25rem - 3px);
 }
 .article-list-item .list-title {
-    font-weight: 600;
-    font-size: 0.9375rem;
-    line-height: 1.4;
-    color: var(--text);
+    font-weight: 600; font-size: 0.9375rem; line-height: 1.4; color: var(--text);
 }
 .article-list-item .list-meta {
-    font-size: 0.8125rem;
-    color: var(--muted);
-    line-height: 1.4;
+    font-size: 0.8125rem; color: var(--muted); line-height: 1.4;
 }
 .article-list-empty {
-    padding: 2rem 1.25rem;
-    text-align: center;
-    color: var(--muted);
-    font-size: 0.875rem;
+    padding: 2rem 1.25rem; text-align: center;
+    color: var(--muted); font-size: 0.875rem;
 }
 .list-filter {
-    padding: 0.75rem 1.25rem;
-    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 1.25rem; border-bottom: 1px solid var(--border);
     background: var(--surface-2);
 }
 .list-filter input {
@@ -183,8 +216,7 @@ body {
     padding: 0.5rem 0.75rem;
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    font: inherit;
-    font-size: 0.875rem;
+    font: inherit; font-size: 0.875rem;
     background: var(--surface);
 }
 .list-filter input:focus { outline: 2px solid var(--primary); outline-offset: -1px; border-color: var(--primary); }
@@ -196,21 +228,13 @@ body {
 @media (max-width: 640px) { .form-row-inline { grid-template-columns: 1fr; } }
 
 label.form-label {
-    font-size: 0.8125rem;
-    font-weight: 600;
-    color: var(--text-2);
+    font-size: 0.8125rem; font-weight: 600; color: var(--text-2);
     letter-spacing: 0.01em;
-    text-transform: uppercase;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 0.5rem;
+    display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem;
 }
 label.form-label .hint {
-    color: var(--muted);
-    font-weight: 400;
-    text-transform: none;
-    letter-spacing: 0;
+    color: var(--muted); font-weight: 400;
+    text-transform: none; letter-spacing: 0;
     font-size: 0.75rem;
 }
 
@@ -221,16 +245,15 @@ textarea, select {
     padding: 0.625rem 0.875rem;
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    font: inherit;
-    font-size: 0.9375rem;
-    background: var(--surface);
-    color: var(--text);
+    font: inherit; font-size: 0.9375rem;
+    background: var(--surface); color: var(--text);
     transition: border-color 0.15s, box-shadow 0.15s;
+    min-height: 2.75rem;
 }
 input:focus, textarea:focus, select:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(20, 58, 134, 0.12);
+    box-shadow: 0 0 0 3px rgba(20, 58, 107, 0.14);
 }
 textarea { min-height: 6.5rem; resize: vertical; line-height: 1.55; font-family: inherit; }
 select {
@@ -249,10 +272,8 @@ select {
 .form-section:last-of-type { border-bottom: none; }
 .form-section-title {
     font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-    font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted); font-weight: 700;
     margin: 0 0 1rem;
 }
 
@@ -261,9 +282,8 @@ select {
 .author-item {
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    padding: 1rem 1rem 1rem;
-    display: grid;
-    gap: 0.75rem;
+    padding: 1rem;
+    display: grid; gap: 0.75rem;
     background: var(--surface-2);
     position: relative;
 }
@@ -275,12 +295,11 @@ select {
 @media (max-width: 640px) { .author-item .author-grid { grid-template-columns: 1fr; } }
 .author-item .author-remove {
     position: absolute; top: 0.5rem; right: 0.5rem;
-    background: transparent; border: none;
-    color: var(--danger);
-    font-size: 1.375rem;
-    cursor: pointer; line-height: 1;
-    padding: 0.25rem 0.5rem;
+    background: transparent; border: none; color: var(--danger);
+    font-size: 1.375rem; cursor: pointer; line-height: 1;
+    padding: 0.375rem 0.625rem;
     border-radius: var(--radius-sm);
+    min-height: 2rem; min-width: 2rem;
     transition: background 0.15s;
 }
 .author-item .author-remove:hover { background: var(--danger-soft); }
@@ -289,21 +308,18 @@ select {
     background: transparent;
     border: 1px dashed var(--border-strong);
     border-radius: var(--radius-sm);
-    padding: 0.625rem 1.125rem;
-    cursor: pointer;
-    font: inherit;
-    font-size: 0.875rem;
-    font-weight: 500;
+    padding: 0.75rem 1.125rem;
+    cursor: pointer; font: inherit;
+    font-size: 0.875rem; font-weight: 500;
     color: var(--primary);
+    margin-top: 0.75rem;
     transition: border-color 0.15s, background 0.15s;
 }
 .add-author-btn:hover { border-color: var(--primary); background: var(--primary-soft); }
 
 /* ==== PDF picker ================================================ */
 .pdf-picker {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+    display: flex; align-items: center; gap: 1rem;
     flex-wrap: wrap;
     padding: 1rem 1.125rem;
     border: 1px dashed var(--border-strong);
@@ -316,8 +332,7 @@ select {
 
 /* ==== Buttons =================================================== */
 .button-row {
-    display: flex;
-    gap: 0.75rem;
+    display: flex; gap: 0.75rem;
     justify-content: space-between;
     padding-top: 1.5rem;
     border-top: 1px solid var(--border);
@@ -331,15 +346,12 @@ button.btn {
     padding: 0.6875rem 1.25rem;
     border: none;
     border-radius: var(--radius-sm);
-    font: inherit;
-    font-size: 0.9375rem;
-    font-weight: 600;
+    font: inherit; font-size: 0.9375rem; font-weight: 600;
     cursor: pointer;
     transition: background 0.15s, border-color 0.15s, color 0.15s;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    display: inline-flex; align-items: center; justify-content: center;
     gap: 0.5rem;
+    min-height: 2.75rem;
 }
 button.btn-primary { background: var(--primary); color: #fff; }
 button.btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
@@ -348,7 +360,7 @@ button.btn-ghost { background: transparent; border: 1px solid var(--border-stron
 button.btn-ghost:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-soft); }
 button.btn-danger { background: transparent; border: 1px solid var(--danger); color: var(--danger); }
 button.btn-danger:hover { background: var(--danger); color: #fff; }
-button.btn-sm { padding: 0.4375rem 0.875rem; font-size: 0.8125rem; }
+button.btn-sm { padding: 0.4375rem 0.875rem; font-size: 0.8125rem; min-height: 2.25rem; }
 
 .checkbox-row {
     display: flex; gap: 0.625rem; align-items: center;
@@ -357,15 +369,18 @@ button.btn-sm { padding: 0.4375rem 0.875rem; font-size: 0.8125rem; }
     border-radius: var(--radius-sm);
     font-size: 0.9375rem;
     cursor: pointer;
+    min-height: 2.75rem;
 }
-.checkbox-row input[type="checkbox"] { width: 1.125rem; height: 1.125rem; accent-color: var(--primary); cursor: pointer; }
+.checkbox-row input[type="checkbox"] {
+    width: 1.125rem; height: 1.125rem;
+    accent-color: var(--primary); cursor: pointer;
+}
 
 /* ==== Status messages =========================================== */
 .form-status {
     padding: 0.75rem 1rem;
     border-radius: var(--radius-sm);
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-size: 0.875rem; font-weight: 500;
     margin-bottom: 0.25rem;
 }
 .form-status.ok { background: var(--success-soft); color: var(--success); }
@@ -374,20 +389,39 @@ button.btn-sm { padding: 0.4375rem 0.875rem; font-size: 0.8125rem; }
 
 .form-empty {
     padding: 4rem 1.5rem;
-    text-align: center;
-    color: var(--muted);
+    text-align: center; color: var(--muted);
 }
-.form-empty h3 { margin: 0 0 0.625rem; color: var(--text); font-size: 1.125rem; font-weight: 700; }
+.form-empty h3 {
+    margin: 0 0 0.625rem;
+    color: var(--text); font-size: 1.125rem; font-weight: 700;
+}
 .form-empty p { margin: 0; font-size: 0.9375rem; }
 
-.spinner {
-    width: 1rem; height: 1rem;
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    display: inline-block;
-    vertical-align: -0.1875rem;
-    margin-right: 0.375rem;
+/* ==== Mobile (≤640px) =========================================== */
+@media (max-width: 640px) {
+    .admin-header {
+        padding: 0.75rem 1rem;
+        gap: 0.75rem;
+    }
+    .admin-header .brand-txt h1 { font-size: 0.9375rem; }
+    .admin-header .brand-txt span { font-size: 0.6875rem; }
+    .admin-header .brand img { width: 2rem; height: 2rem; }
+    .admin-user { font-size: 0.8125rem; gap: 0.5rem; }
+    .admin-user #user-email {
+        max-width: 8rem;
+        overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .site-tabs-strip { padding: 0 1rem; top: 3.5rem; }
+    .site-tab { padding: 0.75rem 0.875rem; font-size: 0.75rem; }
+    .admin-main { padding: 0.75rem; }
+    .panel-body { padding: 1.25rem 1.125rem 1.5rem; }
+    .panel-head { padding: 0.875rem 1rem; }
+    .list-filter { padding: 0.625rem 1rem; }
+    .article-list-item { padding: 0.75rem 1rem; }
+    .login-shell { padding: 1rem; }
+    .login-card { padding: 1.75rem 1.5rem 1.5rem; }
+    .form-empty { padding: 2.5rem 1rem; }
+    .button-row { flex-direction: column-reverse; gap: 0.625rem; align-items: stretch; }
+    .button-row .button-right { margin: 0; flex-direction: column; }
+    .button-row button.btn { width: 100%; }
 }
-@keyframes spin { to { transform: rotate(360deg); } }
