@@ -31,6 +31,7 @@ const viewerCurrentIssue = document.getElementById("viewer-current-issue");
 // All published issues, newest first.
 const JOURNAL_ISSUES = [
     { year: 2026, issue: 5 },
+    { year: 2026, issue: 4 },
     { year: 2026, issue: 3 },
     { year: 2026, issue: 2 },
     { year: 2026, issue: 1 },
