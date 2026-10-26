@@ -57,57 +57,57 @@ let scrollPositionBeforeFullscreen = 0;
 
 // ===== Editorial board data =====
 const leadership = [
-    { role: "Bosh muharrir", name: "Sayfullayev Nodirbek Baxtiyorovich", degree: "Tarix fanlari nomzodi, professor" },
-    { role: "Bosh muharrir o'rinbosari", name: "Yakubov Baxtiyor Choriyevich", degree: "San'atshunoslik fanlari bo'yicha falsafa doktori (PhD), dotsent" },
+    { role: "Boş muharrir", name: "Sayfullayev Nodirbek Baxtiyorovich", degree: "Tarix fanlari nomzodi, professor" },
+    { role: "Boş muharrir örinbosari", name: "Yakubov Baxtiyor Choriyevich", degree: "San'atşunoslik fanlari böyiça falsafa doktori (PhD), dotsent" },
     { role: "Mas'ul kotib", name: "Xolmuminova Nigora Xankulovna", degree: "" },
-    { role: "Sahifalovchi dizayner", name: "Abdulg'oziyeva Ro'zigul Normurod qizi", degree: "" }
+    { role: "Sahifalovçi dizayner", name: "Abdulg'oziyeva Ro'zigul Normurod qizi", degree: "" }
 ];
 
 const council = [
-    { name: "Ozodbek Nazarbekov", note: "O'zbekiston Respublikasi Madaniyat vaziri, O'zbekiston Respublikasi xalq artisti" },
+    { name: "Ozodbek Nazarbekov", note: "Özbekiston Respublikasi Madaniyat vaziri, Özbekiston Respublikasi xalq artisti" },
     { name: "Shuhratilla Rizayev", note: "Kinematografiya agentligi direktori, filologiya fanlari nomzodi, professor" },
     { name: "Otabek Xasanov", note: "Respublika ma'naviyat va ma'rifat markazi direktori, siyosiy fanlar doktori (DSc)" },
-    { name: "Yodgor Sa'diyev", note: "O'zbek Milliy akademik drama teatri direktori, O'zbekiston Respublikasi xalq artisti" },
-    { name: "Nodira Mustafoyeva", note: "FA ijtimoiy-gumanitar fanlar bo'limi boshlig'i, tarix fanlari doktori, professor" },
-    { name: "Kamola Akilova", note: "Tasviriy san'at galereyasi direktori, Badiiy akademiya akademigi, san'atshunoslik fanlari doktori (DSc), professor" },
-    { name: "Jannat Ismoilova", note: "O'zbekiston tarixi davlat muzeyi direktori, tarix fanlari doktori, professor" },
-    { name: "Umida Teshaboyeva", note: "Alisher Navoiy nomidagi O'zbekiston milliy kutubxonasi direktori, tarix fanlari bo'yicha falsafa doktori (PhD)" },
-    { name: "Sirojiddin Sayyid", note: "O'zbekiston Yozuvchilar uyushmasi raisi, O'zbekiston xalq shoiri" },
-    { name: "Rustam Abdullayev", note: "O'zbekiston Bastakorlar uyushmasi raisi, O'zbekiston Respublikasi san'at arbobi" }
+    { name: "Yodgor Sa'diyev", note: "Özbek Milliy akademik drama teatri direktori, Özbekiston Respublikasi xalq artisti" },
+    { name: "Nodira Mustafoyeva", note: "FA ijtimoiy-gumanitar fanlar bölimi boşliği, tarix fanlari doktori, professor" },
+    { name: "Kamola Akilova", note: "Tasviriy san'at galereyasi direktori, Badiiy akademiya akademigi, san'atşunoslik fanlari doktori (DSc), professor" },
+    { name: "Jannat Ismoilova", note: "Özbekiston tarixi davlat muzeyi direktori, tarix fanlari doktori, professor" },
+    { name: "Umida Teshaboyeva", note: "Alişer Navoiy nomidagi Özbekiston milliy kutubxonasi direktori, tarix fanlari böyiça falsafa doktori (PhD)" },
+    { name: "Sirojiddin Sayyid", note: "Özbekiston Yozuvçilar uyuşmasi raisi, Özbekiston xalq şoiri" },
+    { name: "Rustam Abdullayev", note: "Özbekiston Bastakorlar uyuşmasi raisi, Özbekiston Respublikasi san'at arbobi" }
 ];
 
 const board = [
-    { name: "Muhabbat Tulyaxodjayeva", degree: "San'atshunoslik fanlari doktori, professor" },
-    { name: "Sarvinoz Qodirova", degree: "San'atshunoslik fanlari doktori, professor" },
-    { name: "Oltinoy Tojiboyeva", degree: "San'atshunoslik fanlari doktori, professor" },
-    { name: "Guzal Xalikulova", degree: "San'atshunoslik fanlari doktori, professor" },
-    { name: "Rustambek Abdullayev", degree: "O'zbekiston Respublikasi san'at arbobi, san'atshunoslik fanlari doktori, professor" },
-    { name: "Ravshan Yunusov", degree: "O'zbekiston Respublikasi san'at arbobi, san'atshunoslik fanlari nomzodi, professor" },
-    { name: "Akbar Xakimov", degree: "Fanlar akademiyasi va Badiiy akademiya akademigi, san'atshunoslik fanlari doktori, professor" },
-    { name: "Nigora Axmedova", degree: "Badiiy akademiya akademigi, san'atshunoslik fanlari doktori, professor" },
-    { name: "Abduxalil Mavrulov", degree: "O'zbekistonda xizmat ko'rsatgan yoshlar murabbiysi, tarix fanlari doktori, professor" },
+    { name: "Muhabbat Tulyaxodjayeva", degree: "San'atşunoslik fanlari doktori, professor" },
+    { name: "Sarvinoz Qodirova", degree: "San'atşunoslik fanlari doktori, professor" },
+    { name: "Oltinoy Tojiboyeva", degree: "San'atşunoslik fanlari doktori, professor" },
+    { name: "Guzal Xalikulova", degree: "San'atşunoslik fanlari doktori, professor" },
+    { name: "Rustambek Abdullayev", degree: "Özbekiston Respublikasi san'at arbobi, san'atşunoslik fanlari doktori, professor" },
+    { name: "Ravshan Yunusov", degree: "Özbekiston Respublikasi san'at arbobi, san'atşunoslik fanlari nomzodi, professor" },
+    { name: "Akbar Xakimov", degree: "Fanlar akademiyasi va Badiiy akademiya akademigi, san'atşunoslik fanlari doktori, professor" },
+    { name: "Nigora Axmedova", degree: "Badiiy akademiya akademigi, san'atşunoslik fanlari doktori, professor" },
+    { name: "Abduxalil Mavrulov", degree: "Özbekistonda xizmat körsatgan yoşlar murabbiysi, tarix fanlari doktori, professor" },
     { name: "Sayyora Tuychiyeva", degree: "Falsafa fanlari doktori, professor" },
     { name: "Viktor Alemasov", degree: "Falsafa fanlari doktori, professor (v.b.)" },
-    { name: "Marfua Xamidova", degree: "San'atshunoslik fanlari doktori, professor" },
-    { name: "Dilafruz Qodirova", degree: "San'atshunoslik fanlari doktori, professor" },
+    { name: "Marfua Xamidova", degree: "San'atşunoslik fanlari doktori, professor" },
+    { name: "Dilafruz Qodirova", degree: "San'atşunoslik fanlari doktori, professor" },
     { name: "Ma'rufjon Yuldoshev", degree: "Filologiya fanlari doktori, professor" },
     { name: "Guzalxon Isakova", degree: "Filologiya fanlari doktori (DSc), dotsent" },
     { name: "Nilufar Isakulova", degree: "Pedagogika fanlari doktori (DSc), professor" },
     { name: "Muhammadjon Quronov", degree: "Pedagogika fanlari doktori, professor" },
     { name: "Absalom Umarov", degree: "Sotsiologiya fanlari doktori, professor" },
-    { name: "Sevil Kerimova", degree: "San'atshunoslik fanlari bo'yicha falsafa doktori (PhD), dotsent" },
+    { name: "Sevil Kerimova", degree: "San'atşunoslik fanlari böyiça falsafa doktori (PhD), dotsent" },
     { name: "Aziza Kurbanova", degree: "Pedagogika fanlari doktori (DSc), dotsent" },
-    { name: "Zumriniso Kozimova", degree: "Filologiya fanlari bo'yicha falsafa doktori (PhD), dotsent" },
-    { name: "Shahlo Hamidova", degree: "San'atshunoslik fanlari bo'yicha falsafa doktori" },
-    { name: "Gulnoza Bobonazarova", degree: "Filologiya fanlari bo'yicha falsafa doktori" },
-    { name: "Nasiba Turg'unova", degree: "San'atshunoslik fanlari bo'yicha falsafa doktori, dotsent" },
+    { name: "Zumriniso Kozimova", degree: "Filologiya fanlari böyiça falsafa doktori (PhD), dotsent" },
+    { name: "Shahlo Hamidova", degree: "San'atşunoslik fanlari böyiça falsafa doktori" },
+    { name: "Gulnoza Bobonazarova", degree: "Filologiya fanlari böyiça falsafa doktori" },
+    { name: "Nasiba Turg'unova", degree: "San'atşunoslik fanlari böyiça falsafa doktori, dotsent" },
     { name: "Shoira Asadova", degree: "Tarix fanlari nomzodi, dotsent" },
-    { name: "Muhayyo Muxtorova", degree: "San'atshunoslik fanlari bo'yicha falsafa doktori" },
+    { name: "Muhayyo Muxtorova", degree: "San'atşunoslik fanlari böyiça falsafa doktori" },
     { name: "O'ktam Nosirov", degree: "Falsafa fanlari nomzodi, dotsent" },
     { name: "Zoya Arislanbayeva", degree: "Tarix fanlari nomzodi, dotsent" },
-    { name: "Robiya Tursunmetova", degree: "San'atshunoslik fanlari bo'yicha falsafa doktori" },
-    { name: "Aybek Kopadze", degree: "San'atshunoslik fanlari nomzodi, dotsent" },
-    { name: "Oybek Davlatov", degree: "Pedagogika fanlari bo'yicha falsafa doktori (PhD)" }
+    { name: "Robiya Tursunmetova", degree: "San'atşunoslik fanlari böyiça falsafa doktori" },
+    { name: "Aybek Kopadze", degree: "San'atşunoslik fanlari nomzodi, dotsent" },
+    { name: "Oybek Davlatov", degree: "Pedagogika fanlari böyiça falsafa doktori (PhD)" }
 ];
 
 function el(tag, className, text) {
