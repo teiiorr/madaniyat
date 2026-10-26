@@ -83,8 +83,13 @@
     <header class="topbar">
         <a class="topbar-brand" href="#haqida">
             <img src="/assets/logo.png" alt="" class="topbar-logo">
-            <span>ÖzMS jurnali</span>
+            <span data-i18n="brandShort">ÖzMS jurnali</span>
         </a>
+        <div class="lang-switcher" role="group" aria-label="Language">
+            <button class="lang-button is-active" type="button" data-lang="uz" aria-pressed="true">ÖZ</button>
+            <button class="lang-button" type="button" data-lang="ru" aria-pressed="false">РУ</button>
+            <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
         <button class="menu-toggle" type="button" id="menu-toggle" aria-label="Menyu" aria-expanded="false">
             <span></span><span></span><span></span>
         </button>
@@ -95,26 +100,31 @@
     <div class="ms-shell">
         <aside class="rail" id="rail">
             <a class="rail-brand" href="#haqida">
-                <img src="/assets/logo.png" alt="ÖzDSMI" class="rail-logo">
+                <img src="/assets/logo.png" alt="" class="rail-logo">
                 <span class="rail-brand-text">
-                    <strong>Özbekiston madaniyati<br>va san'ati</strong>
-                    <em>Ilmiy elektron jurnal</em>
+                    <strong><span data-i18n="brandLong1">Özbekiston madaniyati</span><br><span data-i18n="brandLong2">va san'ati</span></strong>
+                    <em data-i18n="brandSub">Ilmiy elektron jurnal</em>
                 </span>
             </a>
 
-            <nav class="rail-nav" aria-label="Bölimlar">
-                <a href="#haqida"><span class="rail-nav-num">01</span> Jurnal haqida</a>
-                <a href="#maqsad"><span class="rail-nav-num">02</span> Maqsad va ruknlar</a>
-                <a href="#talablar"><span class="rail-nav-num">03</span> Mualliflarga</a>
-                <a href="#tahririyat"><span class="rail-nav-num">04</span> Tahririyat</a>
-                <a href="#arxiv"><span class="rail-nav-num">05</span> Arxiv</a>
-                <a href="/maqola"><span class="rail-nav-num">06</span> Maqolalar</a>
-                <a href="#aloqa"><span class="rail-nav-num">07</span> Aloqa</a>
+            <nav class="rail-nav" aria-label="Sections">
+                <a href="#haqida"><span class="rail-nav-num">01</span> <span data-i18n="navAbout">Jurnal haqida</span></a>
+                <a href="#maqsad"><span class="rail-nav-num">02</span> <span data-i18n="navGoals">Maqsad va ruknlar</span></a>
+                <a href="#talablar"><span class="rail-nav-num">03</span> <span data-i18n="navAuthors">Mualliflarga</span></a>
+                <a href="#tahririyat"><span class="rail-nav-num">04</span> <span data-i18n="navEditorial">Tahririyat</span></a>
+                <a href="#arxiv"><span class="rail-nav-num">05</span> <span data-i18n="navArchive">Arxiv</span></a>
+                <a href="/maqola"><span class="rail-nav-num">06</span> <span data-i18n="navArticles">Maqolalar</span></a>
+                <a href="#aloqa"><span class="rail-nav-num">07</span> <span data-i18n="navContact">Aloqa</span></a>
             </nav>
 
             <div class="rail-foot">
-                <a class="rail-cta" href="#aloqa">Maqola yuboriş</a>
-                <p class="rail-foot-meta">OAK röyxati · 2025-yil 31-oktabr<br>№376/5 · san'atşunoslik</p>
+                <div class="lang-switcher lang-switcher--rail" role="group" aria-label="Language">
+                    <button class="lang-button is-active" type="button" data-lang="uz" aria-pressed="true">ÖZ</button>
+                    <button class="lang-button" type="button" data-lang="ru" aria-pressed="false">РУ</button>
+                    <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
+                </div>
+                <a class="rail-cta" href="#aloqa" data-i18n="submitArticle">Maqola yuboriş</a>
+                <p class="rail-foot-meta" data-i18n="railMeta">OAK röyxati · 2025-yil 31-oktabr<br>№376/5 · san'atşunoslik</p>
                 <a class="rail-tg" href="https://t.me/m_s_jurnali" target="_blank" rel="noopener noreferrer">@m_s_jurnali</a>
             </div>
         </aside>
@@ -122,25 +132,25 @@
         <main class="main">
             <!-- 01 — Jurnal haqida / hero -->
             <section class="sec hero is-active" id="haqida">
-                <p class="eyebrow">Ilmiy-uslubiy · nazariy-amaliy · elektron jurnal</p>
-                <h1 class="hero-title">Özbekiston<br>madaniyati va san'ati</h1>
-                <p class="hero-lead">Özbekiston davlat san'at va madaniyat instituti qoşidagi oçiq foydalanişdagi ilmiy elektron jurnal — san'at, madaniyat va gumanitar fanlar böyiça tadqiqotlar uçun zamonaviy minbar.</p>
+                <p class="eyebrow" data-i18n="heroEyebrow">Ilmiy-uslubiy · nazariy-amaliy · elektron jurnal</p>
+                <h1 class="hero-title"><span data-i18n="heroTitle1">Özbekiston</span><br><span data-i18n="heroTitle2">madaniyati va san'ati</span></h1>
+                <p class="hero-lead" data-i18n="heroLead">Özbekiston davlat san'at va madaniyat instituti qoşidagi oçiq foydalanişdagi ilmiy elektron jurnal — san'at, madaniyat va gumanitar fanlar böyiça tadqiqotlar uçun zamonaviy minbar.</p>
 
                 <figure class="hero-media">
-                    <img src="/assets/madaniyat-new.jpg" alt="Özbekiston davlat san'at va madaniyat instituti">
+                    <img src="/assets/madaniyat-new.jpg" alt="" data-i18n-attr="alt:factMuassisVal">
                 </figure>
 
                 <div class="prose">
-                    <p>Respublikamizda olib borilayotgan islohotlar, san'at va madaniyat sohasiga zamonaviy innovatsion texnologiyalarning kirib kelişi, milliy va umuminsoniy qadriyatlarga sodiqlik hamda Yangi Özbekistonda yangiça dunyoqaraş ğoyalarining tarğibi sifatida Özbekiston davlat san'at va madaniyat instituti qoşida «Özbekiston madaniyati va san'ati» ilmiy-uslubiy, nazariy-amaliy elektron jurnali taşkil etildi.</p>
-                    <p>Jurnal Özbekiston Respublikasi Vazirlar Mahkamasi huzuridagi Oliy attestatsiya komissiyasi rayosatining 2025-yil 31-oktabrdagi №376/5-sonli qarori bilan san'atşunoslik fanlari böyiça dissertatsiyalar yuzasidan asosiy ilmiy natijalarni çop etişga tavsiya etilgan naşrlar röyxatiga kiritilgan.</p>
-                    <p>Jurnal foydalaniş uçun oçiq. E'lon qilingan sonlar tarkibi va maqola matnlari saytning «Arxiv» ruknida veb-sahifa hamda kitob körinişida erkin joylaştiriladi.</p>
+                    <p data-i18n="prose1">Respublikamizda olib borilayotgan islohotlar, san'at va madaniyat sohasiga zamonaviy innovatsion texnologiyalarning kirib kelişi, milliy va umuminsoniy qadriyatlarga sodiqlik hamda Yangi Özbekistonda yangiça dunyoqaraş ğoyalarining tarğibi sifatida Özbekiston davlat san'at va madaniyat instituti qoşida «Özbekiston madaniyati va san'ati» ilmiy-uslubiy, nazariy-amaliy elektron jurnali taşkil etildi.</p>
+                    <p data-i18n="prose2">Jurnal Özbekiston Respublikasi Vazirlar Mahkamasi huzuridagi Oliy attestatsiya komissiyasi rayosatining 2025-yil 31-oktabrdagi №376/5-sonli qarori bilan san'atşunoslik fanlari böyiça dissertatsiyalar yuzasidan asosiy ilmiy natijalarni çop etişga tavsiya etilgan naşrlar röyxatiga kiritilgan.</p>
+                    <p data-i18n="prose3">Jurnal foydalaniş uçun oçiq. E'lon qilingan sonlar tarkibi va maqola matnlari saytning «Arxiv» ruknida veb-sahifa hamda kitob körinişida erkin joylaştiriladi.</p>
                 </div>
 
                 <dl class="facts">
-                    <div class="fact"><dt>Muassis</dt><dd>Özbekiston davlat san'at va madaniyat instituti</dd></div>
-                    <div class="fact"><dt>Davriylik</dt><dd>Yiliga 6 marta — har ikkinçi oyning 20-sanasi</dd></div>
-                    <div class="fact"><dt>Şakl</dt><dd>Elektron, oçiq foydalaniş</dd></div>
-                    <div class="fact"><dt>Tillar</dt><dd>Özbek, qoraqalpoq, rus, ingliz</dd></div>
+                    <div class="fact"><dt data-i18n="factMuassis">Muassis</dt><dd data-i18n="factMuassisVal">Özbekiston davlat san'at va madaniyat instituti</dd></div>
+                    <div class="fact"><dt data-i18n="factDavriylik">Davriylik</dt><dd data-i18n="factDavriylikVal">Yiliga 6 marta — har ikkinçi oyning 20-sanasi</dd></div>
+                    <div class="fact"><dt data-i18n="factShakl">Şakl</dt><dd data-i18n="factShaklVal">Elektron, oçiq foydalaniş</dd></div>
+                    <div class="fact"><dt data-i18n="factTillar">Tillar</dt><dd data-i18n="factTillarVal">Özbek, qoraqalpoq, rus, ingliz</dd></div>
                 </dl>
             </section>
 
@@ -148,71 +158,44 @@
             <section class="sec" id="maqsad">
                 <header class="sec-head">
                     <span class="sec-num">02</span>
-                    <h2 class="sec-title">Maqsad va vazifalar</h2>
+                    <h2 class="sec-title" data-i18n="secGoalsTitle">Maqsad va vazifalar</h2>
                 </header>
 
-                <ul class="goals">
-                    <li>Ilmiy yönalişlarni va hukumatning ilm-fanni qöllab-quvvatlaş siyosatini keng tarğib qiliş.</li>
-                    <li>Respublikamiz oliy ta'lim va ilmiy-tadqiqot institutlari, ilmiy markazlari hamda xorijda bajarilgan tadqiqot natijalarini naşr etiş.</li>
-                    <li>Talaba-yoşlar dunyoqaraşini boyitiş, qölga kiritilayotgan yutuqlar va ilğor tajribalarni jamoatçilikka yetkaziş.</li>
-                    <li>Ta'lim jarayoni, yangi pedagogik texnologiyalar va öqitiş usullarini sifat jihatidan yangilaşni tarğib qiliş.</li>
-                    <li>Professor-öqituvçilarning tadqiqot samaradorligini oşiriş, iqtidorli yoşlarni ilmiy faoliyatga jalb etiş.</li>
-                    <li>Yuksak ma'naviyat va milliy an'analarga sodiqlik ruhini şakllantiriş, yot ğoyalarga nisbatan immunitetni mustahkamlaş.</li>
-                </ul>
+                <ul class="goals" id="goals-list"></ul>
 
-                <h3 class="sub-title">Jurnal ruknlari</h3>
-                <ol class="rubrics">
-                    <li><span class="rubric-no">01</span><span class="rubric-name">Teatr va kino san'ati</span></li>
-                    <li><span class="rubric-no">02</span><span class="rubric-name">Musiqa, raqs, tasviriy san'at</span></li>
-                    <li><span class="rubric-no">03</span><span class="rubric-name">Madaniyatşunoslik, sotsiologiya, siyosatşunoslik</span></li>
-                    <li><span class="rubric-no">04</span><span class="rubric-name">Filologiya, tarix, falsafa</span></li>
-                    <li><span class="rubric-no">05</span><span class="rubric-name">Pedagogika, psixologiya, kutubxonaşunoslik</span></li>
-                </ol>
+                <h3 class="sub-title" data-i18n="rubricsSubtitle">Jurnal ruknlari</h3>
+                <ol class="rubrics" id="rubrics-list"></ol>
             </section>
 
             <!-- 03 — Mualliflarga / talablar -->
             <section class="sec" id="talablar">
                 <header class="sec-head">
                     <span class="sec-num">03</span>
-                    <h2 class="sec-title">Mualliflarga talablar</h2>
+                    <h2 class="sec-title" data-i18n="secReqTitle">Mualliflarga talablar</h2>
                 </header>
-                <p class="sec-lead">Maqolalarga qöyiladigan talablar jahon andozalari va Özbekistondagi doktorlik (PhD, DSc) tadqiqotlari tizimidan kelib çiqadi. Maqola mavzusi jurnal ruknlariga mos kelişi şart.</p>
+                <p class="sec-lead" data-i18n="reqLead">Maqolalarga qöyiladigan talablar jahon andozalari va Özbekistondagi doktorlik (PhD, DSc) tadqiqotlari tizimidan kelib çiqadi. Maqola mavzusi jurnal ruknlariga mos kelişi şart.</p>
 
-                <h3 class="sub-title">Maqola tuzilişi</h3>
-                <div class="struct">
-                    <div class="struct-item"><h4>Muallif ma'lumoti</h4><p>Ismi-şarifi, iş joyi va lavozimi, ilmiy daraja, e-mail va telefon.</p></div>
-                    <div class="struct-item"><h4>Mavzu (Title)</h4><p>Qisqa va lönda, matn tili hamda ingliz tilida beriladi.</p></div>
-                    <div class="struct-item"><h4>Annotatsiya (Abstract)</h4><p>6 qatordan oşmaydi; maqola tili va ingliz tilida.</p></div>
-                    <div class="struct-item"><h4>Kalit sözlar</h4><p>8–10 ta söz; matnda örtaça 4–6 marta takrorlanişi tavsiya etiladi.</p></div>
-                    <div class="struct-item"><h4>Kiriş · asosiy qism · xulosa</h4><p>Muammo, metodologiya, tahlil, natijalar va umumiy xulosalar.</p></div>
-                    <div class="struct-item"><h4>Adabiyotlar röyxati</h4><p>[1], [2] tartibida; matn içida [1, 22-b] körinişida.</p></div>
-                </div>
+                <h3 class="sub-title" data-i18n="structSubtitle">Maqola tuzilişi</h3>
+                <div class="struct" id="struct-list"></div>
 
-                <h3 class="sub-title">Texnik talablar</h3>
-                <ul class="rule-list">
-                    <li>Şrift «Times New Roman», 14, lotin alifbosi, qatorlar oraliği 1.5 interval.</li>
-                    <li>Sahifa çetlari: çap, yuqori va quyi 2 sm, öng 1 sm; abzas 1,25 sm.</li>
-                    <li>Maqola hajmi 6 betdan kam, 10 betdan köp bölmasligi lozim.</li>
-                    <li>Özbek tilidagi ö, ğ, q, h harflari matnda töliq yozilişi şart.</li>
-                    <li>Barça maqolalar «Antiplagiat» tizimida tekşiriladi.</li>
-                    <li>Tahrir va naşrga tayyorlaş narxi — 300 000 söm (muallif hisobidan).</li>
-                </ul>
+                <h3 class="sub-title" data-i18n="techSubtitle">Texnik talablar</h3>
+                <ul class="rule-list" id="rules-list"></ul>
             </section>
 
             <!-- 04 — Tahririyat -->
             <section class="sec" id="tahririyat">
                 <header class="sec-head">
                     <span class="sec-num">04</span>
-                    <h2 class="sec-title">Tahririyat</h2>
+                    <h2 class="sec-title" data-i18n="secEditTitle">Tahririyat</h2>
                 </header>
 
-                <h3 class="sub-title">Rahbariyat</h3>
+                <h3 class="sub-title" data-i18n="rahbariyat">Rahbariyat</h3>
                 <div class="leaders" id="leadership-list"></div>
 
-                <h3 class="sub-title">Jamoatçilik kengaşi</h3>
+                <h3 class="sub-title" data-i18n="kengash">Jamoatçilik kengaşi</h3>
                 <ol class="people" id="council-list"></ol>
 
-                <h3 class="sub-title">Tahrir hay'ati a'zolari</h3>
+                <h3 class="sub-title" data-i18n="boardMembers">Tahrir hay'ati a'zolari</h3>
                 <ol class="people people--cols" id="board-list"></ol>
             </section>
 
@@ -220,51 +203,51 @@
             <section class="sec" id="arxiv">
                 <header class="sec-head">
                     <span class="sec-num">05</span>
-                    <h2 class="sec-title">Arxiv</h2>
+                    <h2 class="sec-title" data-i18n="secArxivTitle">Arxiv</h2>
                 </header>
 
-                <p class="sec-lead">Jurnalning barça e'lon qilingan sonlari — yangisidan eskisiga. Kerakli sonni tanlang va şu sahifada öqing.</p>
+                <p class="sec-lead" data-i18n="arxivLead">Jurnalning barça e'lon qilingan sonlari — yangisidan eskisiga. Kerakli sonni tanlang va şu sahifada öqing.</p>
 
                 <div class="archive-issues" id="archive-issues" aria-label="Jurnal sonlari"></div>
 
                 <div class="journal-viewer">
                     <div class="viewer-head">
                         <div>
-                            <h3>Jurnal sonini öqiş</h3>
-                            <p>Tanlangan sonni töğridan-töğri şu sahifada öqing — varaqlang yoki töliq ekran rejimida öqing.</p>
+                            <h3 data-i18n="viewerTitle">Jurnal sonini öqiş</h3>
+                            <p data-i18n="viewerIntro">Tanlangan sonni töğridan-töğri şu sahifada öqing — varaqlang yoki töliq ekran rejimida öqing.</p>
                             <p class="viewer-current-issue" id="viewer-current-issue"></p>
                         </div>
                     </div>
 
                     <div class="viewer-toolbar">
                         <div class="viewer-toolbar-left">
-                            <div class="view-mode-switch" aria-label="Köriş rejimi">
-                                <button class="view-mode-button" type="button" data-view-mode="single" aria-pressed="false"><span>1 sahifa</span></button>
-                                <button class="view-mode-button" type="button" data-view-mode="spread" aria-pressed="true"><span>2 sahifa</span></button>
+                            <div class="view-mode-switch" aria-label="View mode">
+                                <button class="view-mode-button" type="button" data-view-mode="single" aria-pressed="false"><span data-i18n="singlePage">1 sahifa</span></button>
+                                <button class="view-mode-button" type="button" data-view-mode="spread" aria-pressed="true"><span data-i18n="twoPages">2 sahifa</span></button>
                             </div>
                         </div>
                         <form class="page-jump" id="page-jump-form">
-                            <label class="page-jump-label" for="page-input">Sahifa</label>
+                            <label class="page-jump-label" for="page-input" data-i18n="pageLabel">Sahifa</label>
                             <input id="page-input" class="page-jump-input" type="number" min="1" step="1" value="1" inputmode="numeric">
-                            <button class="page-jump-button" type="submit">Oçiş</button>
+                            <button class="page-jump-button" type="submit" data-i18n="openBtn">Oçiş</button>
                         </form>
                     </div>
 
                     <div class="viewer-stage">
                         <div class="book-shell" id="book-shell">
-                            <div class="book-status" id="journal-status">PDF yuklanmoqda...</div>
+                            <div class="book-status" id="journal-status" data-i18n="pdfLoading">PDF yuklanmoqda...</div>
 
                             <div class="book-spread" id="book-spread">
                                 <div class="book-gutter"></div>
                                 <div class="book-page left-page" id="left-page">
                                     <div class="page-number left-number" id="left-page-number"></div>
                                     <canvas id="left-page-canvas"></canvas>
-                                    <div class="page-empty" id="left-page-empty">Böş sahifa</div>
+                                    <div class="page-empty" id="left-page-empty" data-i18n="emptyPage">Böş sahifa</div>
                                 </div>
                                 <div class="book-page right-page" id="right-page">
                                     <div class="page-number right-number" id="right-page-number"></div>
                                     <canvas id="right-page-canvas"></canvas>
-                                    <div class="page-empty" id="right-page-empty">Böş sahifa</div>
+                                    <div class="page-empty" id="right-page-empty" data-i18n="emptyPage">Böş sahifa</div>
                                 </div>
                             </div>
 
@@ -280,14 +263,14 @@
                                     <button class="reader-icon-button" type="button" data-journal-nav="next" aria-label="Keyingi"><svg class="reader-button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg></button>
                                 </div>
                                 <label class="fullscreen-page-slider-label" for="fullscreen-page-slider">
-                                    <span>Sahifa</span>
+                                    <span data-i18n="pageLabel">Sahifa</span>
                                     <input id="fullscreen-page-slider" class="fullscreen-page-slider" type="range" min="1" max="1" value="1">
                                 </label>
                                 <div class="fullscreen-reader-group">
-                                    <button class="reader-text-button" type="button" data-reader-tone="soft"><svg class="reader-button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v2"></path><path d="M12 19v2"></path><path d="M4.2 4.2l1.4 1.4"></path><path d="M18.4 18.4l1.4 1.4"></path><path d="M3 12h2"></path><path d="M19 12h2"></path><circle cx="12" cy="12" r="4"></circle></svg><span>Yumşoq</span></button>
-                                    <button class="reader-text-button" type="button" data-reader-tone="dark"><svg class="reader-button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A7.5 7.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"></path></svg><span>Tungi</span></button>
-                                    <button class="reader-text-button" type="button" data-view-mode="single"><svg class="reader-button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path></svg><span>1 sahifa</span></button>
-                                    <button class="reader-text-button" type="button" id="fullscreen-exit"><svg class="reader-button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3v3a2 2 0 0 1-2 2H3"></path><path d="M21 8h-3a2 2 0 0 1-2-2V3"></path><path d="M16 21v-3a2 2 0 0 1 2-2h3"></path><path d="M3 16h3a2 2 0 0 1 2 2v3"></path></svg><span>Oddiy ekran</span></button>
+                                    <button class="reader-text-button" type="button" data-reader-tone="soft"><svg class="reader-button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v2"></path><path d="M12 19v2"></path><path d="M4.2 4.2l1.4 1.4"></path><path d="M18.4 18.4l1.4 1.4"></path><path d="M3 12h2"></path><path d="M19 12h2"></path><circle cx="12" cy="12" r="4"></circle></svg><span data-i18n="softMode">Yumşoq</span></button>
+                                    <button class="reader-text-button" type="button" data-reader-tone="dark"><svg class="reader-button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A7.5 7.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"></path></svg><span data-i18n="darkMode">Tungi</span></button>
+                                    <button class="reader-text-button" type="button" data-view-mode="single"><svg class="reader-button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path></svg><span data-i18n="singlePage">1 sahifa</span></button>
+                                    <button class="reader-text-button" type="button" id="fullscreen-exit"><svg class="reader-button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3v3a2 2 0 0 1-2 2H3"></path><path d="M21 8h-3a2 2 0 0 1-2-2V3"></path><path d="M16 21v-3a2 2 0 0 1 2-2h3"></path><path d="M3 16h3a2 2 0 0 1 2 2v3"></path></svg><span data-i18n="standardScreen">Oddiy ekran</span></button>
                                 </div>
                             </div>
                         </div>
@@ -296,8 +279,8 @@
                     <div class="viewer-footer">
                         <div class="viewer-counter"><strong id="journal-page-counter">0 / 0</strong></div>
                         <div class="viewer-footer-actions">
-                            <a class="pdf-link" id="pdf-link" href="/assets/journal/2026-5.pdf" target="_blank" rel="noopener noreferrer">PDF oçiş</a>
-                            <button class="viewer-action" type="button" id="fullscreen-toggle" aria-label="Töliq ekran">Töliq ekran</button>
+                            <a class="pdf-link" id="pdf-link" href="/assets/journal/2026-5.pdf" target="_blank" rel="noopener noreferrer" data-i18n="pdfOpen">PDF oçiş</a>
+                            <button class="viewer-action" type="button" id="fullscreen-toggle" aria-label="Full screen" data-i18n="fullscreenBtn">Töliq ekran</button>
                         </div>
                     </div>
                 </div>
@@ -307,50 +290,50 @@
             <section class="sec" id="maqolalar">
                 <header class="sec-head">
                     <span class="sec-num">06</span>
-                    <h2 class="sec-title">Maqolalar</h2>
+                    <h2 class="sec-title" data-i18n="secMaqolalarTitle">Maqolalar</h2>
                 </header>
 
-                <p class="sec-lead">Alohida ilmiy maqolalarni yuklab olişingiz mumkin. Mualliflar, sonlar va kalit sözlar böyiça filtrlang.</p>
+                <p class="sec-lead" data-i18n="maqolalarLead">Alohida ilmiy maqolalarni yuklab olişingiz mumkin. Mualliflar, sonlar va kalit sözlar böyiça filtrlang.</p>
 
                 <div class="articles-toolbar">
-                    <input id="articles-search" type="search" placeholder="Sarlavha yoki muallif...">
-                    <select id="articles-year"><option value="">Yil</option></select>
+                    <input id="articles-search" type="search" placeholder="Sarlavha yoki muallif..." data-i18n-attr="placeholder:searchPlaceholder">
+                    <select id="articles-year"><option value="" data-i18n="yearOpt">Yil</option></select>
                     <select id="articles-language">
-                        <option value="">Til</option>
-                        <option value="uz">Özbek</option>
-                        <option value="kaa">Qoraqalpoq</option>
-                        <option value="ru">Rus</option>
-                        <option value="en">Ingliz</option>
+                        <option value="" data-i18n="langOpt">Til</option>
+                        <option value="uz" data-i18n="langUz">Özbek</option>
+                        <option value="kaa" data-i18n="langKaa">Qoraqalpoq</option>
+                        <option value="ru" data-i18n="langRu">Rus</option>
+                        <option value="en" data-i18n="langEn">Ingliz</option>
                     </select>
                 </div>
 
                 <div id="articles-grid" class="articles-grid" aria-live="polite"></div>
-                <div id="articles-empty" class="articles-empty" hidden>Hozirça maqolalar yöq.</div>
+                <div id="articles-empty" class="articles-empty" hidden data-i18n="articlesEmpty">Hozirça maqolalar yöq.</div>
             </section>
 
             <!-- 07 — Aloqa -->
             <section class="sec" id="aloqa">
                 <header class="sec-head">
                     <span class="sec-num">07</span>
-                    <h2 class="sec-title">Aloqa</h2>
+                    <h2 class="sec-title" data-i18n="secAloqaTitle">Aloqa</h2>
                 </header>
 
                 <div class="contact">
                     <div class="contact-card">
-                        <span class="contact-role">Jurnal muharriri</span>
-                        <strong class="contact-name">Nigora Xolmuminova Xankulovna</strong>
+                        <span class="contact-role" data-i18n="contactEditorRole">Jurnal muharriri</span>
+                        <strong class="contact-name" data-i18n="contactName">Nigora Xolmuminova Xankulovna</strong>
                         <a href="tel:+998974084984">+998 97 408 49 84</a>
                         <a href="mailto:sanatmadaniyat4@gmail.com">sanatmadaniyat4@gmail.com</a>
                         <a href="https://t.me/m_s_jurnali" target="_blank" rel="noopener noreferrer">Telegram — @m_s_jurnali</a>
                     </div>
                     <div class="contact-card">
-                        <span class="contact-role">Tahririyat manzili</span>
-                        <p>Özbekiston Respublikasi, Toşkent şahri, 100164, Yalanğoç dahasi, Zafar Diyor köçasi, 127-«A» uy.</p>
-                        <p class="contact-org">Özbekiston davlat san'at va madaniyat instituti</p>
+                        <span class="contact-role" data-i18n="contactAddressRole">Tahririyat manzili</span>
+                        <p data-i18n="contactAddress">Özbekiston Respublikasi, Toşkent şahri, 100164, Yalanğoç dahasi, Zafar Diyor köçasi, 127-«A» uy.</p>
+                        <p class="contact-org" data-i18n="contactOrg">Özbekiston davlat san'at va madaniyat instituti</p>
                     </div>
                 </div>
 
-                <p class="foot-note">© «Özbekiston madaniyati va san'ati» elektron jurnali. Maqoladagi ma'lumotlar töğriligi va ilgari surilgan ğoya uçun muallif javobgardir.</p>
+                <p class="foot-note" data-i18n="footNote">© «Özbekiston madaniyati va san'ati» elektron jurnali. Maqoladagi ma'lumotlar töğriligi va ilgari surilgan ğoya uçun muallif javobgardir.</p>
                 <p class="foot-credit">Designed &amp; developed by <a href="https://teiior.uz" target="_blank" rel="noopener noreferrer">teiior</a></p>
             </section>
         </main>

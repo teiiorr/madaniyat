@@ -1,3 +1,15 @@
+import { translations, translateDegree, translateNote } from "./translations.js";
+
+// ===== i18n state =====
+let currentLang = (() => {
+    const stored = localStorage.getItem("ms-lang");
+    return (stored && translations[stored]) ? stored : "uz";
+})();
+
+function t(key) {
+    return translations[currentLang]?.[key] ?? translations.uz[key] ?? key;
+}
+
 // ===== Element references =====
 const pageJumpForm = document.getElementById("page-jump-form");
 const pageInput = document.getElementById("page-input");
@@ -117,35 +129,137 @@ function el(tag, className, text) {
     return node;
 }
 
+// Map uz new-alphabet role strings to translation keys.
+const ROLE_KEY = {
+    "Boş muharrir": "roleBoshMuharrir",
+    "Boş muharrir örinbosari": "roleBoshMuharrirOrinbosari",
+    "Mas'ul kotib": "roleMasulKotib",
+    "Sahifalovçi dizayner": "roleSahifalovchi"
+};
+
+function translateRole(uz) {
+    const key = ROLE_KEY[uz];
+    return key ? t(key) : uz;
+}
+
 function renderBoard() {
     const leadersHost = document.getElementById("leadership-list");
     if (leadersHost) {
+        leadersHost.innerHTML = "";
         leadership.forEach((person) => {
             const card = el("article", "leader");
-            card.append(el("span", "leader-role", person.role));
+            card.append(el("span", "leader-role", translateRole(person.role)));
             card.append(el("h4", "leader-name", person.name));
-            if (person.degree) card.append(el("p", "leader-degree", person.degree));
+            if (person.degree) card.append(el("p", "leader-degree", translateDegree(person.degree, currentLang)));
             leadersHost.append(card);
         });
     }
 
-    const renderPeople = (host, items) => {
+    const renderPeople = (host, items, kind) => {
         if (!host) return;
+        host.innerHTML = "";
         items.forEach((person, index) => {
             const li = el("li", "person");
             li.append(el("span", "person-num", String(index + 1)));
             const body = el("div", "person-body");
             body.append(el("span", "person-name", person.name));
-            const detail = person.degree || person.note;
+            let detail = "";
+            if (person.degree) detail = translateDegree(person.degree, currentLang);
+            else if (person.note) detail = translateNote(person.note, currentLang);
             if (detail) body.append(el("span", "person-detail", detail));
             li.append(body);
             host.append(li);
         });
     };
 
-    renderPeople(document.getElementById("council-list"), council);
-    renderPeople(document.getElementById("board-list"), board);
+    renderPeople(document.getElementById("council-list"), council, "council");
+    renderPeople(document.getElementById("board-list"), board, "board");
 }
+
+// ===== i18n: list renderers (goals / rubrics / structure / rules) =====
+function renderDynamicLists() {
+    const d = translations[currentLang];
+
+    const goalsHost = document.getElementById("goals-list");
+    if (goalsHost) {
+        goalsHost.innerHTML = "";
+        d.goals.forEach((text) => goalsHost.append(el("li", null, text)));
+    }
+
+    const rubricsHost = document.getElementById("rubrics-list");
+    if (rubricsHost) {
+        rubricsHost.innerHTML = "";
+        d.rubrics.forEach((text, i) => {
+            const li = el("li");
+            li.append(el("span", "rubric-no", String(i + 1).padStart(2, "0")));
+            li.append(el("span", "rubric-name", text));
+            rubricsHost.append(li);
+        });
+    }
+
+    const structHost = document.getElementById("struct-list");
+    if (structHost) {
+        structHost.innerHTML = "";
+        d.structure.forEach((item) => {
+            const div = el("div", "struct-item");
+            div.append(el("h4", null, item.title));
+            div.append(el("p", null, item.desc));
+            structHost.append(div);
+        });
+    }
+
+    const rulesHost = document.getElementById("rules-list");
+    if (rulesHost) {
+        rulesHost.innerHTML = "";
+        d.rules.forEach((text) => rulesHost.append(el("li", null, text)));
+    }
+}
+
+// ===== i18n: setLanguage =====
+function applyI18nAttrs() {
+    document.documentElement.lang = t("htmlLang");
+    document.title = t("pageTitle");
+
+    document.querySelectorAll("[data-i18n]").forEach((node) => {
+        const key = node.getAttribute("data-i18n");
+        const value = t(key);
+        if (key.endsWith("Meta") || key === "railMeta") {
+            node.innerHTML = value;
+        } else {
+            node.textContent = value;
+        }
+    });
+
+    document.querySelectorAll("[data-i18n-attr]").forEach((node) => {
+        const spec = node.getAttribute("data-i18n-attr");
+        spec.split(",").forEach((pair) => {
+            const [attr, key] = pair.split(":").map((s) => s.trim());
+            if (attr && key) node.setAttribute(attr, t(key));
+        });
+    });
+}
+
+function setLanguage(lang) {
+    if (!translations[lang]) return;
+    currentLang = lang;
+    localStorage.setItem("ms-lang", lang);
+
+    applyI18nAttrs();
+    renderDynamicLists();
+    renderBoard();
+    syncCurrentIssueLabel();
+
+    document.querySelectorAll(".lang-button").forEach((btn) => {
+        const isActive = btn.dataset.lang === currentLang;
+        btn.classList.toggle("is-active", isActive);
+        btn.setAttribute("aria-pressed", String(isActive));
+    });
+}
+
+// Attach language switcher buttons once DOM is ready — safe here since app.js is a module (deferred).
+document.querySelectorAll(".lang-button").forEach((btn) => {
+    btn.addEventListener("click", () => setLanguage(btn.dataset.lang));
+});
 
 // ===== Navigation: mobile drawer + scrollspy =====
 function closeNav() {
@@ -624,6 +738,8 @@ async function loadPdf() {
 }
 
 function formatIssueLabel(entry) {
+    if (currentLang === "ru") return `${entry.year}, выпуск № ${entry.issue}`;
+    if (currentLang === "en") return `${entry.year}, Issue ${entry.issue}`;
     return `${entry.year}-yil, ${entry.issue}-son`;
 }
 
@@ -694,7 +810,7 @@ function renderArchive() {
 }
 
 // ===== Init =====
-renderBoard();
+setLanguage(currentLang);
 renderArchive();
 selectIssue(currentIssue);
 syncFullscreenButton();
